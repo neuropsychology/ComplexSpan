@@ -49,3 +49,5 @@ This is a Psychopy implementation of a composite complex span task adapted from 
 
 The R code provided (preprocessing.R) only preprocesses the simple span and complex span components.
 
+![Correct Proportion of Distractors](https://github.com/neuropsychology/ComplexSpan/blob/master/statistics/figures/Distractor_Correct.png)
+

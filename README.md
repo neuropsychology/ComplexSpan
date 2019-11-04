@@ -39,7 +39,7 @@ Packages needed in R:
 2. Click on the green button to begin the task
 3. Enter participant number and session number 
 4. Run task (instruct participants not to press "Enter" at any point during the task unless required, as the experiment would quit if so)
-5. Task outputs 3 files: an excel file, a text document, and a psydat file
+5. Task outputs 3 files: a csv file, a text document, and a psydat file
 
 ### Preprocess the data
 
@@ -50,17 +50,24 @@ Open R studio and start by running the following:
 source("https://github.com/neuropsychology/ComplexSpan/blob/master/statistics/preprocessing.R")
 source("https://github.com/neuropsychology/ComplexSpan/blob/master/statistics/processing.R")
 ```
-# Set Path in R
-First, set your working directory to source file location (Session > Set Working Directory > To Source File Location)
-Create a folder in your working directory (e.g."data") and create the path for your data.
-E.g. path_to_csv <- "./data/"
-
-This will allow you to use the functions created to preprocess the datafile. You can then simply run:
+Set Path in R
+- First, set your working directory to source file location (Session > Set Working Directory > To Source File Location)
+- Create a folder in your working directory called "data" and create the path for your output csv file (E.g. path_to_csv <- "./data/pilot_1.csv")
+- This will allow you to use the functions created to preprocess the datafile. You can then simply run:
 
 ```r
 preprocess_WM(path_to_csv)
+This creates a single dataframe for the participant comprising of the simple span and complex span task components.
+
 process_WM(path_to_csv)
+This creates 3 dataframes:
+- The participant's span scores and mean reaction time of the processing trials
+- The participant's proportion of correct recall, mean processing reaction time, and proportion of correct processing across set sizes
+- The participant's mean processing reaction time and proportion of correct processing across different distractors (to later check if any distractors
+are disproportionately easier or harder)
 ```
+To create figures, create a folder called "figures" in your working directory, download the R file make_figures.R and run the code. 
+The code will save the figures in this folder
 
 ### Task Components
 
@@ -91,13 +98,7 @@ familiarize participants with the task, and 3) the actual complex span task
     - Start with set size of 2; set size increases by 1 with each correct recall
     - Block ends after 3 consecutive wrong recall
 
-### Pre-processing
-
-The R code provided (preprocessing.R) only preprocesses the simple span and complex span components.
-
 ### Figures
-
-The R code make_figures.R produces the following figures.
 
 ![Span Size of Participants](https://github.com/neuropsychology/ComplexSpan/blob/master/statistics/figures/Participant_SpanSize.png)
 ![Correct Recall across Set Size](https://github.com/neuropsychology/ComplexSpan/blob/master/statistics/figures/SetSize_RecallCorr.png)

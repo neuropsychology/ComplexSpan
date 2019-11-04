@@ -35,7 +35,7 @@ Packages needed in R:
 
 ### Run the task
 
-1. Download and open the experiment in Psychopy (source("https://github.com/neuropsychology/ComplexSpan/blob/master/psychopy/task.psyexp")
+1. Download and open the experiment in Psychopy: source("https://github.com/neuropsychology/ComplexSpan/blob/master/psychopy/task.psyexp")
 2. Click on the green button to begin the task
 3. Enter participant number and session number 
 4. Run task (instruct participants not to press "Enter" at any point during the task unless required, as the experiment would quit if so)
@@ -50,10 +50,9 @@ Open R studio and start by running the following:
 source("https://github.com/neuropsychology/ComplexSpan/blob/master/statistics/preprocessing.R")
 source("https://github.com/neuropsychology/ComplexSpan/blob/master/statistics/processing.R")
 ```
-Set Path in R
-- First, set your working directory to source file location (Session > Set Working Directory > To Source File Location)
-- Create a folder in your working directory called "data" and create the path for your output csv file (E.g. path_to_csv <- "./data/pilot_1.csv")
-- This will allow you to use the functions created to preprocess the datafile. You can then simply run:
+Then, set your working directory to the source file location (Session > Set Working Directory > To Source File Location).
+Create a folder in your working directory called "data" and create the path for your output csv file (E.g. path_to_csv <- "./data/pilot_1.csv").
+This will allow you to use the functions created to preprocess the datafile. You can then simply run:
 
 ```r
 preprocess_WM(path_to_csv)
@@ -66,8 +65,9 @@ This creates 3 dataframes:
 - The participant's mean processing reaction time and proportion of correct processing across different distractors (to later check if any distractors
 are disproportionately easier or harder)
 ```
-To create figures, create a folder called "figures" in your working directory, download the R file make_figures.R and run the code. 
-The code will save the figures in this folder
+To create figures, create a folder called "figures" in your working directory, download the R file:
+- source("https://github.com/neuropsychology/ComplexSpan/blob/master/statistics/make_figures.R")
+The make_figures.R code will save the figures in this folder.
 
 ### Task Components
 

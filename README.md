@@ -51,7 +51,9 @@ source("https://github.com/neuropsychology/ComplexSpan/blob/master/statistics/pr
 source("https://github.com/neuropsychology/ComplexSpan/blob/master/statistics/processing.R")
 ```
 Then, set your working directory to the source file location (Session > Set Working Directory > To Source File Location).
-Create a folder in your working directory called "data" and create the path for your output csv file (E.g. path_to_csv <- "./data/pilot_1.csv").
+Create a folder in your working directory called "data" and create the path for your output csv file
+-  E.g., path_to_csv <- "./data/pilot_1.csv"
+
 This will allow you to use the functions created to preprocess the datafile. You can then simply run:
 
 ```r
@@ -65,9 +67,9 @@ This creates 3 dataframes:
 - The participant's mean processing reaction time and proportion of correct processing across different distractors (to later check if any distractors
 are disproportionately easier or harder)
 ```
-To create figures, create a folder called "figures" in your working directory, download the R file:
+To create figures, create a folder called "figures" in your working directory, download the make_figures.R file; running the code will save the figures in this folder.
 - source("https://github.com/neuropsychology/ComplexSpan/blob/master/statistics/make_figures.R")
-The make_figures.R code will save the figures in this folder.
+
 
 ### Task Components
 

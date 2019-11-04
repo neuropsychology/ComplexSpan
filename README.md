@@ -58,16 +58,15 @@ This will allow you to use the functions created to preprocess the datafile. You
 
 ```r
 preprocess_WM(path_to_csv)
-This creates a single dataframe for the participant comprising of the simple span and complex span task components.
+# This creates a single dataframe for the participant comprising of the simple span and complex span task components.
 
 process_WM(path_to_csv)
-This creates 3 dataframes:
-- The participant's span scores and mean reaction time of the processing trials
-- The participant's proportion of correct recall, mean processing reaction time, and proportion of correct processing across set sizes
-- The participant's mean processing reaction time and proportion of correct processing across different distractors (to later check if any distractors
+# This creates 3 dataframes: 1) The participant's span scores and mean reaction time of the processing trials; 2) The participant's proportion of correct recall, mean processing reaction time, and proportion of correct processing across set sizes;
+3) The participant's mean processing reaction time and proportion of correct processing across different distractors (to later check if any distractors
 are disproportionately easier or harder)
 ```
-To create figures, create a folder called "figures" in your working directory, download the make_figures.R file; running the code will save the figures in this folder.
+
+To create figures, create a folder called "figures" in your working directory and download the make_figures.R file; running the code will save the figures in this folder.
 - source("https://github.com/neuropsychology/ComplexSpan/blob/master/statistics/make_figures.R")
 
 

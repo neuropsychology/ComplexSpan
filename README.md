@@ -61,8 +61,10 @@ preprocess_WM(path_to_csv)
 # This creates a single dataframe for the participant comprising of the simple span and complex span task components.
 
 process_WM(path_to_csv)
-# This creates 3 dataframes: 1) The participant's span scores and mean reaction time of the processing trials; 2) The participant's proportion of correct recall, mean processing reaction time, and proportion of correct processing across set sizes;
-3) The participant's mean processing reaction time and proportion of correct processing across different distractors (to later check if any distractors
+# This creates 3 dataframes:
+# The participant's span scores and mean reaction time of the processing trials;
+# The participant's proportion of correct recall, mean processing reaction time, and proportion of correct processing across set sizes;
+# The participant's mean processing reaction time and proportion of correct processing across different distractors (to later check if any distractors
 are disproportionately easier or harder)
 ```
 
@@ -73,14 +75,14 @@ To create figures, create a folder called "figures" in your working directory an
 ### Task Components
 
 This is a Psychopy implementation of a composite complex span task adapted from Gonthier et al. (2015). It comprises of 2 components, the simple span
-and the complex span.
+and the complex span:
 
-- **Simple Span**: Presentation of consonants to be remembered
+**Simple Span**: Presentation of consonants to be remembered
   - Consonants to remember
   - Set size increases after 2 correct answers in a set size
   - Simple span determined as set size attained after 3 incorrect answers
 
--**Complex Span**: Components include 1) a processing block for practice on arithmetic operations, 2) a short practice complex span task to 
+**Complex Span**: Components include 1) a processing block for practice on arithmetic operations, 2) a short practice complex span task to 
 familiarize participants with the task, and 3) the actual complex span task
   - **Processing**: open-ended arithmetic operations to respond to
     - All correct answers are one-digit

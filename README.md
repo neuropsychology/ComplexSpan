@@ -49,5 +49,14 @@ This is a Psychopy implementation of a composite complex span task adapted from 
 
 The R code provided (preprocessing.R) only preprocesses the simple span and complex span components.
 
-![Correct Proportion of Distractors](https://github.com/neuropsychology/ComplexSpan/blob/master/statistics/figures/Distractor_Correct.png)
+### Figures
 
+The R code make_figures.R produces the following figures.
+
+![Span Size of Participants](https://github.com/neuropsychology/ComplexSpan/blob/master/statistics/figures/Participant_SpanSize.png)
+![Correct Recall across Set Size](https://github.com/neuropsychology/ComplexSpan/blob/master/statistics/figures/SetSize_RecallCorr.png)
+![Correct Processing across Set Size](https://github.com/neuropsychology/ComplexSpan/blob/master/statistics/figures/SetSize_ProcessingCorr.png)
+![Processing RT across Set Size](https://github.com/neuropsychology/ComplexSpan/blob/master/statistics/figures/SetSize_ProcessingRT.png)
+![Correct Proportion of Distractors](https://github.com/neuropsychology/ComplexSpan/blob/master/statistics/figures/Distractor_Correct.png)
+![RT of Distractors](https://github.com/neuropsychology/ComplexSpan/blob/master/statistics/figures/Distractor_RT.png)
+![RT vs Correct Proportion of Distractors](https://github.com/neuropsychology/ComplexSpan/blob/master/statistics/figures/Distractor_RTvsCorrect.png)

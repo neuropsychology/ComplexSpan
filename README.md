@@ -1,6 +1,8 @@
 # Complex Span Task
 
-*Adaptation and implementation by [Lau, Z. J.](https://github.com/zen-juen), [Pham, T.](https://github.com/Tam-Pham), & [Makowski, D.]()*
+![Credits](https://zenodo.org/badge/doi/10.5281/zenodo.3529329.svg)
+
+***A Psychopy Implementation of the Complex Span for Working Memory Assessment*** [(Lau, Z. J.](https://github.com/zen-juen), [Pham, T.](https://github.com/Tam-Pham), & [Makowski, D., 2010)](https://github.com/DominiqueMakowski)*
 
 ## Description
 
@@ -100,6 +102,24 @@ and the complex span:
     - No feedback provided
     - Start with set size of 2; set size increases by 1 with each correct recall
     - Block ends after 3 consecutive wrong recall
+
+### Credits
+
+This task can be referenced as follows:
+
+```
+@misc{complexspan2019,
+  title={A Psychopy Implementation of the Complex Span for Working Memory Assessment},
+  author={Lau, Zen J and Pham, Thanh T and Makowski, Dominique},
+  month = nov,
+  year = 2019
+  doi = {10.5281/zenodo.3529329.svg}
+  version ={0.0.1},
+  publisher={Zenodo}
+  url = {http://doi/10.5281/zenodo.3529329.svg}
+}
+
+```
 
 ### Figures
 

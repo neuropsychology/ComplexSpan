@@ -1,5 +1,7 @@
 # Complex Span Task
 
+*Adaptation and implementation by [Lau, Z. J.](https://github.com/zen-juen), [Pham, T.](https://github.com/Tam-Pham), & [Makowski, D.]()*
+
 ## Description
 
 **Working Memory** is a critical component of human cognition and can be defined as the ability to store and process information simultaneously.
@@ -29,9 +31,8 @@ Softwares needed:
 - R Studio (https://rstudio.com/products/rstudio/download/)
 
 Packages needed in R:
-- tidyverse
-- ggplot2
-- see
+- [tidyverse](https://cran.r-project.org/web/packages/tidyverse/index.html)
+- [easystats](https://github.com/easystats/easystats)
 
 ### Run the task
 

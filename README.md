@@ -2,7 +2,7 @@
 
 ![Credits](https://zenodo.org/badge/doi/10.5281/zenodo.3529329.svg)
 
-***A Psychopy Implementation of the Complex Span for Working Memory Assessment*** [(Lau, Z. J.](https://github.com/zen-juen), [Pham, T.](https://github.com/Tam-Pham), & [Makowski, D., 2010)](https://github.com/DominiqueMakowski)*
+***A Psychopy Implementation of the Complex Span for Working Memory Assessment*** [(Lau, Z. J.](https://github.com/zen-juen), [Pham, T. T.](https://github.com/Tam-Pham), & [Makowski, D., 2019)](https://github.com/DominiqueMakowski)*
 
 ## Description
 

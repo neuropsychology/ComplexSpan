@@ -7,7 +7,7 @@
 **Working Memory** is a critical component of human cognition and can be defined as the ability to store and process information simultaneously.
 
 A **complex span task** is the commonly used tool by researchers and practitioners to assess working memory capacity; it does so by interleaving 
-to-be-recalled material (e.g., digits or letters) with processing tasks (e.g., verbal, spatiovisual) . One example would be to have participants read a series of sentences and deciding whether they were correct
+to-be-recalled material (e.g., digits, letters, visual patterns) with processing tasks (e.g., verbal, spatiovisual). One example would be to have participants read a series of sentences and deciding whether they were correct
 while remembering the last word of each sentence for serial recall at the end of each trial (Daneman & Carpenter, 1980).
 
 However, research and clinical settings currently face a few issues regarding the use of complex span tasks:
@@ -89,13 +89,13 @@ and the complex span:
     - Feedback provided with each processing trial
     - Processing block to repeat if cumulative score attained < 65%
 
-  - **Complex Span Practice**: Practice block containing arithmetic operations and to-be-recalled consonants
+  - **Complex Span Practice**: Practice block containing open-ended arithmetic operations and to-be-recalled consonants
     - Consonant presented after each correctly-answered arithmetic operation (if incorrectly answered, a new arithmetic operation is presented)
     - Set size of 2 only
     - Feedback provided with each processing trial and each recall trial
     - Block ends after 3 consecutive correct recall
 
-  - **Complex Span Task**: Test block containing arithmetic operations and to-be-recalled consonants
+  - **Complex Span Task**: Test block containing open-ended arithmetic operations and to-be-recalled consonants
     - Consonant presented after each correctly-answered arithmetic operation (if incorrectly answered, a new arithmetic operation is presented)
     - No feedback provided
     - Start with set size of 2; set size increases by 1 with each correct recall

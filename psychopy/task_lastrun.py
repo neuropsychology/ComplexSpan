@@ -2,7 +2,7 @@
 # -*- coding: utf-8 -*-
 """
 This experiment was created using PsychoPy3 Experiment Builder (v3.2.4),
-    on November 04, 2019, at 18:39
+    on November 06, 2019, at 16:38
 If you publish work using this script the most relevant publication is:
 
     Peirce J, Gray JR, Simpson S, MacAskill M, Höchenberger R, Sogo H, Kastman E, Lindeløv JK. (2019) 
@@ -602,8 +602,6 @@ for thisNext_level in next_level:
                     text_2.frameNStop = frameN  # exact frame index
                     win.timeOnFlip(text_2, 'tStopRefresh')  # time at next scr refresh
                     text_2.setAutoDraw(False)
-            win.getMovieFrame()
-            
             
             # check for quit (typically the Esc key)
             if endExpNow or defaultKeyboard.getKeys(keyList=["escape"]):
@@ -914,7 +912,7 @@ for thisRepeat_practice in repeat_practice:
     # set up handler to look after randomisation of conditions etc
     trials = data.TrialHandler(nReps=1, method='random', 
         extraInfo=expInfo, originPath=-1,
-        trialList=data.importConditions('materials\\processing_only_2.xlsx'),
+        trialList=data.importConditions('..\\materials\\processing_only_2.xlsx'),
         seed=None, name='trials')
     thisExp.addLoop(trials)  # add the loop to the experiment
     thisTrial = trials.trialList[0]  # so we can initialise stimuli with some values
@@ -1415,7 +1413,7 @@ for thisSpan_recall_prac in span_recall_prac:
         # set up handler to look after randomisation of conditions etc
         repeat_if_wrong_prac = data.TrialHandler(nReps=999, method='random', 
             extraInfo=expInfo, originPath=-1,
-            trialList=data.importConditions('materials\\processing_only_2.xlsx'),
+            trialList=data.importConditions('..\\materials\\processing_only_2.xlsx'),
             seed=None, name='repeat_if_wrong_prac')
         thisExp.addLoop(repeat_if_wrong_prac)  # add the loop to the experiment
         thisRepeat_if_wrong_prac = repeat_if_wrong_prac.trialList[0]  # so we can initialise stimuli with some values
@@ -2144,7 +2142,7 @@ for thisSpan_recall in span_recall:
         # set up handler to look after randomisation of conditions etc
         repeat_if_wrong = data.TrialHandler(nReps=999, method='random', 
             extraInfo=expInfo, originPath=-1,
-            trialList=data.importConditions('materials\\processing_only_2.xlsx'),
+            trialList=data.importConditions('..\\materials\\processing_only_2.xlsx'),
             seed=None, name='repeat_if_wrong')
         thisExp.addLoop(repeat_if_wrong)  # add the loop to the experiment
         thisRepeat_if_wrong = repeat_if_wrong.trialList[0]  # so we can initialise stimuli with some values
@@ -2753,7 +2751,6 @@ thisExp.addData('key_resp_12.stopped', key_resp_12.tStopRefresh)
 thisExp.nextEntry()
 # the Routine "finished" was not non-slip safe, so reset the non-slip timer
 routineTimer.reset()
-win.saveMovieFrames()
 
 # Flip one final time so any remaining win.callOnFlip() 
 # and win.timeOnFlip() tasks get executed before quitting

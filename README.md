@@ -56,8 +56,11 @@ source("https://github.com/neuropsychology/ComplexSpan/blob/master/statistics/pr
 source("https://github.com/neuropsychology/ComplexSpan/blob/master/statistics/processing.R")
 ```
 Then, **set your working directory** to the source file location (Session > Set Working Directory > To Source File Location).
-Create a folder in your working directory called "data" and **create the path** for your output csv file
--  E.g., path_to_csv <- "./data/pilot_1.csv"
+Create a folder in your working directory called "data" and **create the path** for your output csv file, for example:
+
+```r
+path_to_csv <- "./data/pilot_1.csv"
+```
 
 This will allow you to use the functions created to preprocess the datafile. You can then simply run:
 
@@ -102,7 +105,7 @@ and the complex span:
     - Consonant presented after each correctly-answered arithmetic operation (if incorrectly answered, a new arithmetic operation is presented)
     - No feedback provided
     - Start with set size of 2; set size increases by 1 with each correct recall
-    - Block ends after 3 consecutive wrong recall
+    - Block ends after 2 consecutive wrong recall
 
 ### Credits
 

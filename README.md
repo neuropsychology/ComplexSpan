@@ -1,8 +1,9 @@
-# Complex Span Task
+# Psychopy Implementation of the Complex Span Task
 
 ![Credits](https://zenodo.org/badge/doi/10.5281/zenodo.3529329.svg)
 
-***A Psychopy Implementation of the Complex Span for Working Memory Assessment*** [(Lau, Z. J.](https://github.com/zen-juen), [Pham, T. T.](https://github.com/Tam-Pham), & [Makowski, D., 2019)](https://github.com/DominiqueMakowski)*
+*Lau, Z. J., Pham, T. T., & Makowski, D. (2019)*
+
 
 ## Description
 
@@ -107,16 +108,18 @@ and the complex span:
 
 This task can be referenced as follows:
 
+- Lau, Z. J., Pham, T. T., & Makowski, D. (2019). *A Psychopy Implementation of the Complex Span for Working Memory Assessment*. Retrieved from http://doi.org/10.5281/zenodo.3529329
+
 ```
 @misc{complexspan2019,
   title={A Psychopy Implementation of the Complex Span for Working Memory Assessment},
   author={Lau, Zen J and Pham, Thanh T and Makowski, Dominique},
-  month = nov,
-  year = 2019
-  doi = {10.5281/zenodo.3529329.svg}
+  month = {nov},
+  year = {2019},
+  doi = {10.5281/zenodo.3529329},
   version ={0.0.1},
-  publisher={Zenodo}
-  url = {http://doi/10.5281/zenodo.3529329.svg}
+  publisher={Zenodo},
+  url = {http://doi.org/10.5281/zenodo.3529329}
 }
 
 ```

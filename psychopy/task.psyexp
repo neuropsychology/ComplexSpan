@@ -105,7 +105,7 @@
         <Param name="allowedKeys" updates="constant" val="'1', '2', '3', '4', '5', '6', '7', '8', '9', '0'" valType="code"/>
         <Param name="correctAns" updates="constant" val="$Operation_answer" valType="str"/>
         <Param name="disabled" updates="None" val="False" valType="bool"/>
-        <Param name="discard previous" updates="constant" val="False" valType="bool"/>
+        <Param name="discard previous" updates="constant" val="True" valType="bool"/>
         <Param name="durationEstim" updates="None" val="" valType="code"/>
         <Param name="forceEndRoutine" updates="constant" val="True" valType="bool"/>
         <Param name="name" updates="None" val="key_resp" valType="code"/>
@@ -144,7 +144,7 @@
         <Param name="wrapWidth" updates="constant" val="" valType="code"/>
       </TextComponent>
       <CodeComponent name="code_14">
-        <Param name="Begin Experiment" updates="constant" val="" valType="extendedCode"/>
+        <Param name="Begin Experiment" updates="constant" val="RT_list = [] #empty list to hold values" valType="extendedCode"/>
         <Param name="Begin JS Experiment" updates="constant" val="" valType="extendedCode"/>
         <Param name="Begin JS Routine" updates="constant" val="" valType="extendedCode"/>
         <Param name="Begin Routine" updates="constant" val="" valType="extendedCode"/>
@@ -154,7 +154,7 @@
         <Param name="End Experiment" updates="constant" val="" valType="extendedCode"/>
         <Param name="End JS Experiment" updates="constant" val="" valType="extendedCode"/>
         <Param name="End JS Routine" updates="constant" val="" valType="extendedCode"/>
-        <Param name="End Routine" updates="constant" val="" valType="extendedCode"/>
+        <Param name="End Routine" updates="constant" val="key_resp.rt = float(''.join([str(x) for x in key_resp.rt]))&amp;#10;&amp;#10;RT_list.append(key_resp.rt)&amp;#10;thisExp.addData('RT_list', RT_list)" valType="extendedCode"/>
         <Param name="disabled" updates="None" val="False" valType="bool"/>
         <Param name="name" updates="None" val="code_14" valType="code"/>
       </CodeComponent>
@@ -188,7 +188,7 @@
         <Param name="Begin Experiment" updates="constant" val="msg = ''&amp;#10;" valType="extendedCode"/>
         <Param name="Begin JS Experiment" updates="constant" val="" valType="extendedCode"/>
         <Param name="Begin JS Routine" updates="constant" val="" valType="extendedCode"/>
-        <Param name="Begin Routine" updates="constant" val="if trials.thisN == 0:&amp;#10;    number_correct = 0&amp;#10;&amp;#10;if (''.join(key_resp.keys) == str(Operation_answer)):&amp;#10;    number_correct = number_correct + 1&amp;#10;    msg='Correct! \nScore = %.3f percent' %(number_correct*100/trials.nTotal)&amp;#10;    msgColor = 'green'&amp;#10;else:&amp;#10;    msg='Oops! That was wrong \nScore = %.3f percent' %(number_correct*100/trials.nTotal)&amp;#10;    msgColor = 'red'" valType="extendedCode"/>
+        <Param name="Begin Routine" updates="constant" val="if trials.thisN == 0:&amp;#10;    number_correct = 0&amp;#10;&amp;#10;if (''.join(key_resp.keys) == str(Operation_answer)):&amp;#10;    number_correct = number_correct + 1&amp;#10;    msg='Correct! \nScore = %.1f%%' %(number_correct*100/trials.nTotal)&amp;#10;    msgColor = 'green'&amp;#10;else:&amp;#10;    msg='Oops! That was wrong \nScore = %.1f%%' %(number_correct*100/trials.nTotal)&amp;#10;    msgColor = 'red'" valType="extendedCode"/>
         <Param name="Code Type" updates="None" val="Py" valType="str"/>
         <Param name="Each Frame" updates="constant" val="&amp;#10;&amp;#10;&amp;#10;" valType="extendedCode"/>
         <Param name="Each JS Frame" updates="constant" val="" valType="extendedCode"/>
@@ -226,10 +226,10 @@
     </Routine>
     <Routine name="final_feedback">
       <CodeComponent name="code_2">
-        <Param name="Begin Experiment" updates="constant" val="proc_msg = ''" valType="extendedCode"/>
+        <Param name="Begin Experiment" updates="constant" val="proc_msg = ''&amp;#10;sumRT = 0&amp;#10;sumdiff = 0" valType="extendedCode"/>
         <Param name="Begin JS Experiment" updates="constant" val="" valType="extendedCode"/>
         <Param name="Begin JS Routine" updates="constant" val="" valType="extendedCode"/>
-        <Param name="Begin Routine" updates="constant" val="if trials.thisN == trials.nTotal:&amp;#10;    if (number_correct/(trials.nTotal)) &gt;= 0.65:&amp;#10;        proc_msg = 'Congratulations, you answered correctly on above 65% of the trials. Press space to continue.'&amp;#10;        repeat_practice.finished = True&amp;#10;        thisExp.addData(&quot;processing_score&quot;, (number_correct/(trials.nTotal)))&amp;#10;    else:&amp;#10;        proc_msg = 'You failed to answer correctly on at least 65% of the trials, please try again until you reach the passing rate of 65%. Press space to start.'&amp;#10;        repeat_practice.finished = False&amp;#10;" valType="extendedCode"/>
+        <Param name="Begin Routine" updates="constant" val="if trials.thisN == trials.nTotal:&amp;#10;    if (number_correct/(trials.nTotal)) &gt;= 0.65:&amp;#10;        proc_msg = 'Congratulations, you answered correctly on above 65% of the trials. Press space to continue.'&amp;#10;        repeat_practice.finished = True&amp;#10;        thisExp.addData(&quot;processing_score&quot;, (number_correct/(trials.nTotal)))&amp;#10;    else:&amp;#10;        proc_msg = 'You failed to answer correctly on at least 65% of the trials, please try again until you reach the passing rate of 65%. Press space to start.'&amp;#10;        repeat_practice.finished = False &amp;#10;&amp;#10;&amp;#10;for x in RT_list:&amp;#10;    sumRT = sumRT + x&amp;#10;&amp;#10;thisExp.addData('sumRT', sumRT)&amp;#10;meanRT = sumRT/15&amp;#10;thisExp.addData('meanRT', meanRT)&amp;#10;&amp;#10;for x in RT_list:&amp;#10;    sumdiff = sumdiff + ((x - meanRT)**2)&amp;#10;&amp;#10;thisExp.addData('sumdiff', sumdiff)&amp;#10;sd = (sumdiff/15) ** 0.5&amp;#10;thisExp.addData('sd', sd)&amp;#10;&amp;#10;RT = meanRT + (2.58*sd)&amp;#10;thisExp.addData('RT', RT)&amp;#10;" valType="extendedCode"/>
         <Param name="Code Type" updates="None" val="Py" valType="str"/>
         <Param name="Each Frame" updates="constant" val="" valType="extendedCode"/>
         <Param name="Each JS Frame" updates="constant" val="" valType="extendedCode"/>
@@ -304,7 +304,7 @@
         <Param name="stopType" updates="None" val="duration (s)" valType="str"/>
         <Param name="stopVal" updates="constant" val="" valType="code"/>
         <Param name="syncScreenRefresh" updates="None" val="True" valType="bool"/>
-        <Param name="text" updates="constant" val="Letters will now appear one by one.&amp;#10;Please remember them in the correct order of appearance.&amp;#10;Try not to say the letters out loud while recalling.&amp;#10;&amp;#10;Press space to continue.&amp;#10;" valType="str"/>
+        <Param name="text" updates="constant" val="Letters will now appear one by one.&amp;#10;Please remember them in the correct order of appearance.&amp;#10;Do not say the letters out loud while recalling.&amp;#10;&amp;#10;Press space to continue.&amp;#10;" valType="str"/>
         <Param name="units" updates="None" val="from exp settings" valType="str"/>
         <Param name="wrapWidth" updates="constant" val="" valType="code"/>
       </TextComponent>
@@ -373,7 +373,7 @@
         <Param name="allowedKeys" updates="constant" val="'a','b','c','d','e','f','g','h','i','j','k','l','m','n','o','p','q','r','s','t','u','v','w','x','y','z', 'backspace','return'" valType="code"/>
         <Param name="correctAns" updates="constant" val="" valType="str"/>
         <Param name="disabled" updates="None" val="False" valType="bool"/>
-        <Param name="discard previous" updates="constant" val="False" valType="bool"/>
+        <Param name="discard previous" updates="constant" val="True" valType="bool"/>
         <Param name="durationEstim" updates="None" val="" valType="code"/>
         <Param name="forceEndRoutine" updates="constant" val="False" valType="bool"/>
         <Param name="name" updates="None" val="key_resp_5" valType="code"/>
@@ -569,7 +569,7 @@
         <Param name="startType" updates="None" val="time (s)" valType="str"/>
         <Param name="startVal" updates="None" val="0.5" valType="code"/>
         <Param name="stopType" updates="None" val="duration (s)" valType="str"/>
-        <Param name="stopVal" updates="constant" val="" valType="code"/>
+        <Param name="stopVal" updates="constant" val="$RT" valType="code"/>
         <Param name="syncScreenRefresh" updates="None" val="True" valType="bool"/>
         <Param name="text" updates="set every repeat" val="$Problem" valType="str"/>
         <Param name="units" updates="None" val="from exp settings" valType="str"/>
@@ -579,7 +579,7 @@
         <Param name="allowedKeys" updates="constant" val="'1', '2', '3', '4', '5', '6', '7', '8', '9', '0'" valType="code"/>
         <Param name="correctAns" updates="constant" val="$Operation_answer" valType="str"/>
         <Param name="disabled" updates="None" val="False" valType="bool"/>
-        <Param name="discard previous" updates="constant" val="False" valType="bool"/>
+        <Param name="discard previous" updates="constant" val="True" valType="bool"/>
         <Param name="durationEstim" updates="None" val="" valType="code"/>
         <Param name="forceEndRoutine" updates="constant" val="True" valType="bool"/>
         <Param name="name" updates="None" val="key_resp_7" valType="code"/>
@@ -588,7 +588,7 @@
         <Param name="startType" updates="None" val="time (s)" valType="str"/>
         <Param name="startVal" updates="None" val="0.5" valType="code"/>
         <Param name="stopType" updates="None" val="duration (s)" valType="str"/>
-        <Param name="stopVal" updates="constant" val="" valType="code"/>
+        <Param name="stopVal" updates="constant" val="$RT" valType="code"/>
         <Param name="store" updates="constant" val="all keys" valType="str"/>
         <Param name="storeCorrect" updates="constant" val="True" valType="bool"/>
         <Param name="syncScreenRefresh" updates="constant" val="True" valType="bool"/>
@@ -611,7 +611,7 @@
         <Param name="startType" updates="None" val="time (s)" valType="str"/>
         <Param name="startVal" updates="None" val="0.5" valType="code"/>
         <Param name="stopType" updates="None" val="duration (s)" valType="str"/>
-        <Param name="stopVal" updates="constant" val="" valType="code"/>
+        <Param name="stopVal" updates="constant" val="$RT" valType="code"/>
         <Param name="syncScreenRefresh" updates="None" val="True" valType="bool"/>
         <Param name="text" updates="set every frame" val="$operation_text_3" valType="str"/>
         <Param name="units" updates="None" val="from exp settings" valType="str"/>
@@ -650,7 +650,7 @@
         <Param name="startType" updates="None" val="time (s)" valType="str"/>
         <Param name="startVal" updates="None" val="0.5" valType="code"/>
         <Param name="stopType" updates="None" val="duration (s)" valType="str"/>
-        <Param name="stopVal" updates="constant" val="" valType="code"/>
+        <Param name="stopVal" updates="constant" val="$RT" valType="code"/>
         <Param name="syncScreenRefresh" updates="None" val="True" valType="bool"/>
         <Param name="text" updates="set every repeat" val="Answer?" valType="str"/>
         <Param name="units" updates="None" val="from exp settings" valType="str"/>
@@ -662,7 +662,7 @@
         <Param name="allowedKeys" updates="constant" val="'a','b','c','d','e','f','g','h','i','j','k','l','m','n','o','p','q','r','s','t','u','v','w','x','y','z', '1', '2', '3', '4', '5', '6', '7', '8', '9', '0', 'backspace','return'" valType="code"/>
         <Param name="correctAns" updates="constant" val="$correct_answer_2" valType="str"/>
         <Param name="disabled" updates="None" val="False" valType="bool"/>
-        <Param name="discard previous" updates="constant" val="False" valType="bool"/>
+        <Param name="discard previous" updates="constant" val="True" valType="bool"/>
         <Param name="durationEstim" updates="None" val="" valType="code"/>
         <Param name="forceEndRoutine" updates="constant" val="False" valType="bool"/>
         <Param name="name" updates="None" val="key_resp_8" valType="code"/>
@@ -831,7 +831,7 @@
         <Param name="allowedKeys" updates="constant" val="'a','b','c','d','e','f','g','h','i','j','k','l','m','n','o','p','q','r','s','t','u','v','w','x','y','z', '1', '2', '3', '4', '5', '6', '7', '8', '9', '0', 'backspace','return'" valType="code"/>
         <Param name="correctAns" updates="constant" val="$correct_answer_3" valType="str"/>
         <Param name="disabled" updates="None" val="False" valType="bool"/>
-        <Param name="discard previous" updates="constant" val="False" valType="bool"/>
+        <Param name="discard previous" updates="constant" val="True" valType="bool"/>
         <Param name="durationEstim" updates="None" val="" valType="code"/>
         <Param name="forceEndRoutine" updates="constant" val="False" valType="bool"/>
         <Param name="name" updates="None" val="key_resp_9" valType="code"/>
@@ -930,7 +930,7 @@
         <Param name="stopType" updates="None" val="duration (s)" valType="str"/>
         <Param name="stopVal" updates="constant" val="" valType="code"/>
         <Param name="syncScreenRefresh" updates="None" val="True" valType="bool"/>
-        <Param name="text" updates="constant" val="In this block, each math equation will be followed by a letter to be recalled.&amp;#10;&amp;#10;Equations will continually be presented unless you correctly answer them.&amp;#10;Please accurately respond to the equations and remember the letters presented after.&amp;#10;&amp;#10;You will first start with some practice trials where feedback is provided.&amp;#10;&amp;#10;Press space to continue." valType="str"/>
+        <Param name="text" updates="constant" val="In this block, each math equation will be followed by a letter to be recalled.&amp;#10;&amp;#10;Equations will continually be presented unless you correctly answer them in the limited time given.&amp;#10;Please accurately respond to the equations and remember the letters presented after.&amp;#10;&amp;#10;You will first start with some practice trials where feedback is provided.&amp;#10;&amp;#10;Press space to continue." valType="str"/>
         <Param name="units" updates="None" val="from exp settings" valType="str"/>
         <Param name="wrapWidth" updates="constant" val="" valType="code"/>
       </TextComponent>
@@ -974,7 +974,7 @@
         <Param name="stopType" updates="None" val="duration (s)" valType="str"/>
         <Param name="stopVal" updates="constant" val="" valType="code"/>
         <Param name="syncScreenRefresh" updates="None" val="True" valType="bool"/>
-        <Param name="text" updates="constant" val="Now you will start the actual task.&amp;#10;&amp;#10;Again, each math equation will be followed by a letter to be recalled.&amp;#10;&amp;#10;Equations will continually be presented unless you correctly answer them.&amp;#10;Please accurately respond to the equations and remember the letters presented after.&amp;#10;No feedback will be provided on whether the letters are correct or not.&amp;#10;Try not to say the letters out loud while recalling.&amp;#10;&amp;#10;Press space to continue." valType="str"/>
+        <Param name="text" updates="constant" val="Now you will start the actual task.&amp;#10;&amp;#10;Again, each math equation will be followed by a letter to be recalled.&amp;#10;&amp;#10;Equations will continually be presented unless you correctly answer them in the limited time given.&amp;#10;Please accurately respond to the equations and remember the letters presented after.&amp;#10;No feedback will be provided on whether the letters are correct or not.&amp;#10;Try not to say the letters out loud while recalling.&amp;#10;&amp;#10;Press space to continue." valType="str"/>
         <Param name="units" updates="None" val="from exp settings" valType="str"/>
         <Param name="wrapWidth" updates="constant" val="" valType="code"/>
       </TextComponent>
@@ -1057,7 +1057,7 @@
         <Param name="startType" updates="None" val="time (s)" valType="str"/>
         <Param name="startVal" updates="None" val="0.5" valType="code"/>
         <Param name="stopType" updates="None" val="duration (s)" valType="str"/>
-        <Param name="stopVal" updates="constant" val="" valType="code"/>
+        <Param name="stopVal" updates="constant" val="$RT" valType="code"/>
         <Param name="syncScreenRefresh" updates="None" val="True" valType="bool"/>
         <Param name="text" updates="set every repeat" val="$Problem&amp;#10;" valType="str"/>
         <Param name="units" updates="None" val="from exp settings" valType="str"/>
@@ -1067,7 +1067,7 @@
         <Param name="allowedKeys" updates="constant" val="'1', '2', '3', '4', '5', '6', '7', '8', '9', '0'" valType="code"/>
         <Param name="correctAns" updates="constant" val="$Operation_answer" valType="str"/>
         <Param name="disabled" updates="None" val="False" valType="bool"/>
-        <Param name="discard previous" updates="constant" val="False" valType="bool"/>
+        <Param name="discard previous" updates="constant" val="True" valType="bool"/>
         <Param name="durationEstim" updates="None" val="" valType="code"/>
         <Param name="forceEndRoutine" updates="constant" val="True" valType="bool"/>
         <Param name="name" updates="None" val="key_resp_11" valType="code"/>
@@ -1076,7 +1076,7 @@
         <Param name="startType" updates="None" val="time (s)" valType="str"/>
         <Param name="startVal" updates="None" val="0.5" valType="code"/>
         <Param name="stopType" updates="None" val="duration (s)" valType="str"/>
-        <Param name="stopVal" updates="constant" val="" valType="code"/>
+        <Param name="stopVal" updates="constant" val="$RT" valType="code"/>
         <Param name="store" updates="constant" val="all keys" valType="str"/>
         <Param name="storeCorrect" updates="constant" val="True" valType="bool"/>
         <Param name="syncScreenRefresh" updates="constant" val="True" valType="bool"/>
@@ -1099,7 +1099,7 @@
         <Param name="startType" updates="None" val="time (s)" valType="str"/>
         <Param name="startVal" updates="None" val="0.5" valType="code"/>
         <Param name="stopType" updates="None" val="duration (s)" valType="str"/>
-        <Param name="stopVal" updates="constant" val="" valType="code"/>
+        <Param name="stopVal" updates="constant" val="$RT" valType="code"/>
         <Param name="syncScreenRefresh" updates="None" val="True" valType="bool"/>
         <Param name="text" updates="set every frame" val="$operation_text_2" valType="str"/>
         <Param name="units" updates="None" val="from exp settings" valType="str"/>
@@ -1138,7 +1138,7 @@
         <Param name="startType" updates="None" val="time (s)" valType="str"/>
         <Param name="startVal" updates="None" val="0.5" valType="code"/>
         <Param name="stopType" updates="None" val="duration (s)" valType="str"/>
-        <Param name="stopVal" updates="constant" val="" valType="code"/>
+        <Param name="stopVal" updates="constant" val="$RT" valType="code"/>
         <Param name="syncScreenRefresh" updates="None" val="True" valType="bool"/>
         <Param name="text" updates="set every repeat" val="Answer?" valType="str"/>
         <Param name="units" updates="None" val="from exp settings" valType="str"/>
@@ -1150,7 +1150,7 @@
         <Param name="Begin Experiment" updates="constant" val="msg3 = ''&amp;#10;loop_o = 0&amp;#10;number_correct_2 = 0" valType="extendedCode"/>
         <Param name="Begin JS Experiment" updates="constant" val="" valType="extendedCode"/>
         <Param name="Begin JS Routine" updates="constant" val="" valType="extendedCode"/>
-        <Param name="Begin Routine" updates="constant" val="loop_o += 1&amp;#10;&amp;#10;if (''.join(key_resp_11.keys) == str(Operation_answer)):&amp;#10;    number_correct_2 = number_correct_2 + 1&amp;#10;    msg3 ='Correct! \nScore = %.3f percent' %(number_correct_2*100/loop_o)&amp;#10;    msg3Color = 'green'&amp;#10;    thisExp.addData(&quot;operation_correct&quot;, 1)&amp;#10;    repeat_if_wrong_prac.finished = True &amp;#10;else:&amp;#10;    msg3 ='Oops! That was wrong \nScore = %.3f percent' %(number_correct_2*100/loop_o)&amp;#10;    msg3Color = 'red'&amp;#10;    thisExp.addData(&quot;operation_correct&quot;, 0)&amp;#10;    repeat_if_wrong_prac.finished = False&amp;#10;&amp;#10;&amp;#10;&amp;#10;" valType="extendedCode"/>
+        <Param name="Begin Routine" updates="constant" val="loop_o += 1&amp;#10;&amp;#10;if not key_resp_11.keys: #if no entry&amp;#10;    continueRoutine = True&amp;#10;    msg3 ='Be faster! \nScore = %.1f%%' %(number_correct_2*100/loop_o)&amp;#10;    msg3Color = 'red'&amp;#10;    thisExp.addData(&quot;operation_correct&quot;, 0)&amp;#10;    repeat_if_wrong_prac.finished = False&amp;#10;else:&amp;#10;    if (''.join(key_resp_11.keys) == str(Operation_answer)):&amp;#10;        number_correct_2 = number_correct_2 + 1&amp;#10;        msg3 ='Correct! \nScore = %.1f%%' %(number_correct_2*100/loop_o)&amp;#10;        msg3Color = 'green'&amp;#10;        thisExp.addData(&quot;operation_correct&quot;, 1)&amp;#10;        repeat_if_wrong_prac.finished = True &amp;#10;    else:&amp;#10;        msg3 ='Oops! That was wrong \nScore = %.1f%%' %(number_correct_2*100/loop_o)&amp;#10;        msg3Color = 'red'&amp;#10;        thisExp.addData(&quot;operation_correct&quot;, 0)&amp;#10;        repeat_if_wrong_prac.finished = False&amp;#10;&amp;#10;&amp;#10;&amp;#10;" valType="extendedCode"/>
         <Param name="Code Type" updates="None" val="Py" valType="str"/>
         <Param name="Each Frame" updates="constant" val="" valType="extendedCode"/>
         <Param name="Each JS Frame" updates="constant" val="" valType="extendedCode"/>
@@ -1215,7 +1215,7 @@
         <Param name="Begin Experiment" updates="constant" val="msg4 = ''&amp;#10;loop_o_2 = 0&amp;#10;number_correct_3 = 0" valType="extendedCode"/>
         <Param name="Begin JS Experiment" updates="constant" val="" valType="extendedCode"/>
         <Param name="Begin JS Routine" updates="constant" val="" valType="extendedCode"/>
-        <Param name="Begin Routine" updates="constant" val="loop_o_2 += 1&amp;#10;&amp;#10;if (''.join(key_resp_7.keys) == str(Operation_answer)):&amp;#10;    number_correct_3 = number_correct_3 + 1&amp;#10;    msg4 ='Correct! \nScore = %.3f percent' %(number_correct_3*100/loop_o_2)&amp;#10;    msg4Color = 'green'&amp;#10;    thisExp.addData(&quot;operation_correct&quot;, 1)&amp;#10;    repeat_if_wrong.finished = True &amp;#10;else:&amp;#10;    msg4 ='Oops! That was wrong \nScore = %.3f percent' %(number_correct_3*100/loop_o_2)&amp;#10;    msg4Color = 'red'&amp;#10;    thisExp.addData(&quot;operation_correct&quot;, 0)&amp;#10;    repeat_if_wrong.finished = False&amp;#10;&amp;#10;&amp;#10;&amp;#10;" valType="extendedCode"/>
+        <Param name="Begin Routine" updates="constant" val="loop_o_2 += 1&amp;#10;&amp;#10;if not key_resp_7.keys: #if no entry&amp;#10;    continueRoutine = True&amp;#10;    msg4 ='Be faster! \nScore = %.1f%%' %(number_correct_3*100/loop_o_2)&amp;#10;    msg4Color = 'red'&amp;#10;    thisExp.addData(&quot;operation_correct&quot;, 0)&amp;#10;    repeat_if_wrong.finished = False&amp;#10;else:&amp;#10;    if (''.join(key_resp_7.keys) == str(Operation_answer)):&amp;#10;        number_correct_3 = number_correct_3 + 1&amp;#10;        msg4 ='Correct! \nScore = %.1f%%' %(number_correct_3*100/loop_o_2)&amp;#10;        msg4Color = 'green'&amp;#10;        thisExp.addData(&quot;operation_correct&quot;, 1)&amp;#10;        repeat_if_wrong.finished = True &amp;#10;    else:&amp;#10;        msg4 ='Oops! That was wrong \nScore = %.1f%%' %(number_correct_3*100/loop_o_2)&amp;#10;        msg4Color = 'red'&amp;#10;        thisExp.addData(&quot;operation_correct&quot;, 0)&amp;#10;        repeat_if_wrong.finished = False&amp;#10;&amp;#10;&amp;#10;&amp;#10;" valType="extendedCode"/>
         <Param name="Code Type" updates="None" val="Py" valType="str"/>
         <Param name="Each Frame" updates="constant" val="" valType="extendedCode"/>
         <Param name="Each JS Frame" updates="constant" val="" valType="extendedCode"/>

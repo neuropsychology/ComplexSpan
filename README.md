@@ -39,7 +39,7 @@ Packages needed in R:
 
 ### Run the task
 
-1. Download and open the experiment in Psychopy: source("https://github.com/neuropsychology/ComplexSpan/blob/master/psychopy/task_nolimit.psyexp") or source("https://github.com/neuropsychology/ComplexSpan/blob/master/psychopy/task.psyexp") 
+1. Download and open the experiment in Psychopy: source("https://github.com/neuropsychology/ComplexSpan/blob/master/psychopy/task.psyexp") 
 2. Click on the green button to begin the task
 3. Enter participant number and session number 
 4. Run task

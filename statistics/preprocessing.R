@@ -78,3 +78,4 @@ preprocess_WM <- function(path){
   Complex_Span$Trial <- rep(N, sort(Duplicates$Freq))
   Complex_Span
 }
+

@@ -97,14 +97,14 @@ and the complex span:
 
   - **Complex Span Practice**: Practice block containing open-ended arithmetic operations and to-be-recalled consonants
     - Consonant presented after each correctly-answered arithmetic operation (if incorrectly answered, a new arithmetic operation is presented)
-    - There is a time limit (mean RT + 2.5 standard deviations of the processing trials extracted from the practice processing block) on the processing trials where the next arithmetic operation is presented if no answer is given and the trial is recorded as incorrect
+    - There is a time limit (mean RT + 2.5 standard deviations of the processing practice trials) on the processing trials where the next arithmetic operation is presented if no answer is given and the trial is recorded as incorrect
     - Set size of 2 only
     - Feedback provided with each processing trial and each recall trial
     - Block ends after 3 consecutive correct recall
 
   - **Complex Span Task**: Test block containing open-ended arithmetic operations and to-be-recalled consonants
     - Consonant presented after each correctly-answered arithmetic operation (if incorrectly answered, a new arithmetic operation is presented)
-    - There is a time limit (mean RT + 2.5 standard deviations of the processing trials extracted from the practice processing block) on the processing trials where the next arithmetic operation is presented if no answer is given and the trial is recorded as incorrect
+    - There is a time limit (mean RT + 2.5 standard deviations of the processing practice trials) on the processing trials where the next arithmetic operation is presented if no answer is given and the trial is recorded as incorrect
     - No feedback provided
     - Start with set size of 2; set size increases by 1 with each correct recall
     - Block ends after 2 consecutive wrong recall

@@ -52,13 +52,13 @@ library(easystats)
   p1 <- ggplot(data = reshape2::melt(data_subject[ , -6], id.vars = "Participant"), aes(variable, value)) +
   geom_point(aes(color = factor(Participant)), position=position_jitter(h=0.15, w=0.15), size = 5) +
   scale_color_discrete(name = "Participant") +
-  scale_x_discrete(labels = c("Complex", "Complex (Adjusted)", "Simple", "Simple (Adjusted)")) +
-    theme(axis.title.x = element_text(angle = 45, hjust = 1, vjust = 1)) +
+  scale_x_discrete(labels = c("Simple", "Simpled (Adjusted)", "Complex", "Complex (Adjusted)")) +
+  theme(axis.title.x = element_text(angle = 45, hjust = 1, vjust = 1)) +
   labs(x = "Span Type",
        y =  "Span Size") +
   theme_modern()
   p1
-
+    
 
   # Correct Proportion Recall, Processing, and Mean RT across Set Size for each participant
   p2 <- ggplot(data = data_within, aes(Set_Size, Recall_Correct)) +

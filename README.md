@@ -4,6 +4,8 @@
 
 *Lau, Z. J., Pham, T. T., & Makowski, D. (2019)*
 
+![](WM.gif)
+
 
 ## Description
 

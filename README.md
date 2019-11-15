@@ -6,7 +6,6 @@
 
 ![](WM.gif)
 
-
 ## Description
 
 **Working Memory** is a critical component of human cognition and can be defined as the ability to store and process information simultaneously.

@@ -142,3 +142,4 @@ ggsave("figures/SetSize_ProcessingRT.png", p4, width = 10, height = 8, dpi = 150
 ggsave("figures/Distractor_RT.png", q1, width = 12, height = 8, dpi = 150)
 ggsave("figures/Distractor_Correct.png", q2, width = 12, height = 8, dpi = 150)
 ggsave("figures/Distractor_RTvsCorrect.png", q3, width = 12, height = 8, dpi = 150)
+

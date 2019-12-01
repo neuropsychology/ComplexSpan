@@ -1,145 +1,131 @@
-### Load packages
-library(ggplot2)
+# Load packages
+library(tidyverse)
 library(easystats)
 
-### Combine Data Frames
+# Load functions
+source("preprocessing.R")
+source("processing.R")
 
-  data <- data.frame()
-  for(participant in list.files("./data/")){
-  data <- rbind(data,
-                preprocess_WM(paste0("./data/", participant))
-  )
-}
-  # Span scores across participants
-  data_subject <- data.frame()
-  for(participant in list.files("./data/")){
-  data_subject <- rbind(data_subject,
-                process_WM(paste0("./data/", participant))[[1]]
-  )
-}
-  # Proportion of Correct Recall, Correct Processing, and Mean RT across Set Sizes for each participant
-  data_within <- data.frame()
-  for(participant in list.files("./data/")){
-  data_within <- dplyr::bind_rows(data_within,
-                       process_WM(paste0("./data/", participant))[[2]]
-  )
-  }
-  data_within <- dplyr::arrange(data_within, Participant, desc(Task), Set_Size)
+# Combine Data Frames
+data <- data.frame()
+data_subject <- data.frame()
+data_within <- data.frame()
+data_distractors <- data.frame()
 
-  # Mean RT and Proportion Correct across Distractors
-  data_distractors <- data.frame()
-  for(participant in list.files("./data/")){
-  data_distractors <- dplyr::bind_rows(data_distractors,
-                           process_WM(paste0("./data/", participant))[[3]]
-  )
+for(participant in list.files("./data/")){
+  data <- rbind(data, preprocess_WM(paste0("./data/", participant)))
+
+  processed <- process_WM(paste0("./data/", participant))
+  data_subject <- rbind(data_subject, processed$between)
+  data_within <- rbind(data_within, processed$within)
+  data_distractors <- rbind(data_distractors, processed$distractors)
 }
-  Freq <- as.data.frame(table(data_distractors$Distractor))$Freq
-  data_distractors <- dplyr::summarize(dplyr::group_by(data_distractors, Distractor),
-                                     RT_Mean = mean(Mean_RT),
-                                     RT_Min = min(Mean_RT),
-                                     RT_Max = max(Mean_RT),
-                                     Correct_Mean = mean(Distractor_Correct),
-                                     Correct_Min = min(Distractor_Correct),
-                                     Correct_Max = max(Distractor_Correct))
-  data_distractors <- cbind(data_distractors, Freq)
-  data_distractors$Distractor[11] <- "(6/3) + 4"
-  data_distractors$Distractor[6] <- "(3x8) - 19"
-  colnames(data_distractors)[8] <- "Occurrences"
+
+
+
+Freq <- as.data.frame(table(data_distractors$Distractor))$Freq
+
+data_distractors <- data_distractors %>%
+  dplyr::group_by(Distractor) %>%
+  dplyr::summarize(RT_Average = mean(RT_Mean),
+                   RT_Min = min(RT_Mean),
+                   RT_Max = max(RT_Mean),
+                   Correct_Average = mean(Distractor_Correct),
+                   Correct_Min = min(Distractor_Correct),
+                   Correct_Max = max(Distractor_Correct))
+data_distractors <- cbind(data_distractors, Freq)
+colnames(data_distractors)[8] <- "Occurrences"
 
 ### Visualize data
 
-  # Max span for each participant
-  p1 <- ggplot(data = reshape2::melt(data_subject[ , -6], id.vars = "Participant"), aes(variable, value)) +
-  geom_point(aes(color = factor(Participant)), position=position_jitter(h=0.15, w=0.15), size = 5) +
-  scale_color_discrete(name = "Participant") +
-  scale_x_discrete(labels = c("Simple", "Simpled (Adjusted)", "Complex", "Complex (Adjusted)")) +
-  theme(axis.title.x = element_text(angle = 45, hjust = 1, vjust = 1)) +
-  labs(x = "Span Type",
-       y =  "Span Size") +
-  theme_modern()
-  p1
-    
-
-  # Correct Proportion Recall, Processing, and Mean RT across Set Size for each participant
-  p2 <- ggplot(data = data_within, aes(Set_Size, Recall_Correct)) +
-    geom_point(aes(color = factor(Participant)), position=position_jitter(h=0.15,w=0.15), size = 5) +
-    geom_smooth(aes(color = factor(Participant)), method="loess", se=F) +
-    scale_color_discrete(name = "Participant") +
-    labs(x = "Set Size",
-       y = "Proportion of Correct recall") +
-    facet_grid(~ Task) +
-    theme(strip.text.x = element_text(size=15)) +
-    theme_modern()
-  p2
+# Max span for each participant
+p1 <- data_subject %>%
+  dplyr::select(Participant, contains("Span")) %>%
+  tidyr::pivot_longer(cols = -Participant, names_to = "Task", values_to = "Span") %>%
+  dplyr::mutate(Adjusted = ifelse(str_detect(Task, "_Adjusted"), "Adjusted", "Raw"),
+                Task = str_remove_all(Task, "_Adjusted"),
+                Task = str_remove_all(Task, "Span_"),
+                Adjusted = fct_relevel(Adjusted, "Raw", "Adjusted"),
+                Task = fct_relevel(Task, "Simple", "Complex")) %>%
+  ggplot(aes(y = Span, fill = Participant, x = Adjusted)) +
+  geom_bar(stat = "identity", position = "dodge") +
+  labs(x = "Score Type", y =  "Span Size") +
+  see::theme_modern() +
+  scale_y_continuous(breaks = scales::pretty_breaks()) +
+  facet_grid(~Task)
+p1
 
 
-  p3 <- ggplot(data = data_within[which(data_within$Task == "Complex"), ], aes(Set_Size, Distractor_Correct)) +
-    geom_point(aes(color = factor(Participant)), position=position_jitter(h=0.15,w=0.15), size = 5) +
-    geom_smooth(aes(color = factor(Participant)), method="loess", se=F) +
-    scale_color_discrete(name = "Participant") +
-    labs(x = "Set Size",
-       y = "Proportion of Correct Processing Trials") +
-    theme_modern()
-  p3
 
 
-  p4 <- ggplot(data = data_within[which(data_within$Task == "Complex"), ], aes(Set_Size, Mean_RT)) +
-    geom_point(aes(color = factor(Participant)), position=position_jitter(h=0.15,w=0.15), size = 5) +
-    geom_smooth(aes(color = factor(Participant)), method="loess", se=F) +
-    scale_color_discrete(name = "Participant") +
-    labs(x = "Set Size",
-         y = "Mean RT of Processing Trials") +
-    theme_modern()
-  p4
+
+# Correct Proportion Recall, Processing, and Mean RT across Set Size for each participant
+p2 <- data_within %>%
+  ggplot(aes(x = Set_Size, y = Recall_Correct, color = Participant)) +
+  geom_line(size = 1) +
+  labs(x = "Set Size", y = "Proportion of Correct Recalls") +
+  facet_grid(~Task) +
+  see::theme_modern()
+p2
 
 
-  # Mean RT and Correct Responses per Distractor
-  q1 <- ggplot(data = data_distractors, aes(x = Distractor, Mean_RT)) +
-  geom_pointrange(aes(y = RT_Mean, ymin = RT_Min, ymax = RT_Max), width=0.2, size=1, color="purple", fill="blue", shape=22) +
+
+
+
+p3 <- data_within[which(data_within$Task == "Complex"), ] %>%
+  ggplot(aes(Set_Size, Distractor_Correct, color = Participant)) +
+  geom_line(size = 1) +
+  labs(x = "Set Size", y = "Proportion of Correct Processing Trials") +
+  see::theme_modern()
+p3
+
+
+
+
+
+p4 <- data_within[which(data_within$Task == "Complex"), ] %>%
+  ggplot(aes(x = Set_Size, y = RT_Mean, color = Participant)) +
+  geom_line(size = 1) +
+  labs(x = "Set Size", y = "Mean RT of Processing Trials") +
+  see::theme_modern()
+p4
+
+
+
+p5 <- data_distractors %>%
+  ggplot(aes(x = Correct_Average, RT_Mean)) +
+  geom_point() +
+  geom_smooth(method="lm", se=F) +
+  labs(x = "Proportion of Correct Responses", y = "Mean Reaction Time") +
+  see::theme_modern()
+p5
+
+
+
+# Mean RT and Correct Responses per Distractor
+p6 <- data_distractors %>%
+  dplyr::select(-Occurrences) %>%
+  tidyr::pivot_longer(-Distractor) %>%
+  mutate(Type = ifelse(str_detect(name, "Correct"), "Correct", "RT"),
+         name = str_remove_all(name, "Correct_|RT_")) %>%
+  tidyr::pivot_wider(names_from = name, values_from = value) %>%
+  ggplot(aes(x = Distractor, y = Average, color = Type)) +
+  geom_pointrange(aes(ymin = Min, ymax = Max), size=1) +
   ylab("Mean Reaction Time") +
   coord_flip() +
-  theme_modern(axis.text.size = 7) +
+  see::theme_modern() +
   theme(axis.title.y = element_blank()) +
-  scale_color_material() +
-  scale_fill_material() +
-  theme(axis.text.x = element_text(size=15),
-        axis.text.y = element_text(size=15),
-        axis.title.x = element_text(size = 15)) +
-  theme_modern()
-  q1
+  facet_wrap(~Type, scales = "free_x")
+p6
 
 
-  q2 <- ggplot(data = data_distractors, aes(x = Distractor, Correct_Mean)) +
-  geom_pointrange(aes(y = Correct_Mean, ymin = Correct_Min, ymax = Correct_Max), width=0.2, size=1, color="orange", fill="red", shape=22) +
-  ylab("Proportion of Correct Responses") +
-  coord_flip() +
-  theme_modern(axis.text.size = 7) +
-  scale_color_material() +
-  scale_fill_material() +
-  theme(axis.text.x = element_text(size=15),
-        axis.text.y = element_text(size=15),
-        axis.title.x = element_text(size = 15)) +
-  theme_modern()
-  q2
 
-  q3 <- ggplot(data = data_distractors, aes(x = Correct_Mean, RT_Mean)) +
-    geom_point(size = 5) +
-    geom_smooth(method="lm", se=F) +
-    labs(x = "Proportion of Correct Responses",
-       y = "Mean Reaction Time") +
-    theme(axis.text.x = element_text(size=15),
-          axis.text.y = element_text(size=15),
-          axis.title.x = element_text(size = 15)) +
-    theme_modern()
-  q3
 
-  # Save Plots
-
+# Save Plots
 ggsave("figures/Participant_SpanSize.png", p1, width = 10, height = 8, dpi = 150)
 ggsave("figures/SetSize_RecallCorr.png", p2, width = 10, height = 8, dpi = 150)
 ggsave("figures/SetSize_ProcessingCorr.png", p3, width = 10, height = 8, dpi = 150)
 ggsave("figures/SetSize_ProcessingRT.png", p4, width = 10, height = 8, dpi = 150)
-ggsave("figures/Distractor_RT.png", q1, width = 12, height = 8, dpi = 150)
-ggsave("figures/Distractor_Correct.png", q2, width = 12, height = 8, dpi = 150)
-ggsave("figures/Distractor_RTvsCorrect.png", q3, width = 12, height = 8, dpi = 150)
+ggsave("figures/Distractor_RTvsCorrect.png", p5, width = 12, height = 8, dpi = 150)
+ggsave("figures/Distractors.png", p6, width = 12, height = 8, dpi = 150)
 

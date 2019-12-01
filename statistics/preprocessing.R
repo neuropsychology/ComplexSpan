@@ -20,6 +20,7 @@ preprocess_WM <- function(path){
 # Utility functions -------------------------------------------------------
 
 
+
 .clean_data <- function(data){
   data <- dplyr::select(data, Participant = participant, Problem, Operation_answer, digit_answer, complex_recall_corr, complex_recall_rt = key_resp_8.rt, complex_proc_corr = key_resp_7.corr, complex_proc_rt = key_resp_7.rt, complex_prac_corr, key_resp_9.rt, key_resp_11.corr, key_resp_11.rt, key_resp.corr, key_resp.rt, processing_score, simple_recall_corr, simple_recall_rt = key_resp_5.rt, simple_recall, complex_recall, simple_recall_corrkeys, complex_answer = complex_recall_corrkeys)
 
@@ -46,6 +47,12 @@ preprocess_WM <- function(path){
   )
   Simple_Span
 }
+
+
+
+
+
+
 
 .clean_ComplexSpan <- function(data){
 
@@ -76,6 +83,7 @@ preprocess_WM <- function(path){
   N <- 1:length(unique(Complex_Span$Stimulus)) # append trial number
   Duplicates <- as.data.frame(table(Complex_Span$Stimulus))
   Complex_Span$Trial <- rep(N, sort(Duplicates$Freq))
+  Complex_Span$Distractor <- trimws(as.character(Complex_Span$Distractor))
   Complex_Span
 }
 

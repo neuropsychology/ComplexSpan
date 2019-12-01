@@ -21,32 +21,35 @@ process_WM <- function(path){
   ### Table of Scores
   # Span Scores per Participant
   Between_Participant <- dplyr::mutate(data,
-                                       Simple_Span = max(Simple_Task$Set_Size) - 1,
-                                       Adjusted_SS = Simple_Span + Adjust_SS,
-                                       Complex_Span = max(Complex_Task$Set_Size) - 1,
-                                       Adjusted_CS = Complex_Span + Adjust_CS,
-                                       Mean_RT = mean(Distractor_RT, na.rm = TRUE))
-  Between_Participant <- dplyr::select(Between_Participant, Participant, Simple_Span, Adjusted_SS, Complex_Span, Adjusted_CS, Mean_RT)
-  Between_Participant <- unique(Between_Participant)
-  Between_Participant$Mean_RT <- round(Between_Participant$Mean_RT, 2)
+                                       Span_Simple = max(Simple_Task$Set_Size) - 1,
+                                       Span_Simple_Adjusted = Span_Simple + Adjust_SS,
+                                       Span_Complex = max(Complex_Task$Set_Size) - 1,
+                                       Span_Complex_Adjusted = Span_Complex + Adjust_CS,
+                                       RT_Mean = mean(Distractor_RT, na.rm = TRUE)) %>%
+    dplyr::select(Participant, Span_Simple, Span_Simple_Adjusted, Span_Complex, Span_Complex_Adjusted, RT_Mean) %>%
+    unique()
+
 
   # Change in proportion of Correct Recall, Correct Processing, and Mean RT as set size increases
-  Within_Participant <- dplyr::summarize(dplyr::group_by(data, Participant, Task, Set_Size),
-                                         Recall_Correct = sum(Correct, na.rm = TRUE)/length(Correct),
-  Mean_RT = mean(Distractor_RT, na.rm = TRUE),
-  Distractor_Correct = sum(Distractor_Correct, na.rm = TRUE)/length(Distractor_Correct))
-  Within_Participant$Distractor_Correct <- ifelse(Within_Participant$Mean_RT == "NaN", "NaN", Within_Participant$Distractor_Correct)
-  Within_Participant$Distractor_Correct <- round(as.numeric(Within_Participant$Distractor_Correct), 2)
-  Within_Participant$Mean_RT <- round(Within_Participant$Mean_RT, 2)
-  Within_Participant$Recall_Correct <- round(Within_Participant$Recall_Correct, 2)
+  Within_Participant <- data %>%
+    dplyr::group_by(Participant, Task, Set_Size) %>%
+    dplyr::summarize(
+      Recall_Correct = sum(Correct, na.rm = TRUE)/length(Correct),
+      RT_Mean = mean(Distractor_RT, na.rm = TRUE),
+      Distractor_Correct = sum(Distractor_Correct, na.rm = TRUE)/length(Distractor_Correct)) %>%
+    dplyr::ungroup()
+
+  Within_Participant$Distractor_Correct <- ifelse(Within_Participant$RT_Mean == "NaN", "NaN", Within_Participant$Distractor_Correct)
+  Within_Participant$Distractor_Correct <- as.numeric(Within_Participant$Distractor_Correct)
+
 
   # Mean RT and Proportion Correct per Distractor
-  Distractors <- dplyr::summarize(dplyr::group_by(Complex_Task, Distractor),
-                               Mean_RT = mean(Distractor_RT, na.rm = TRUE),
-                               Distractor_Correct = sum(Distractor_Correct, na.rm = TRUE)/length(Distractor_Correct))
-  Distractors$Mean_RT <- round(Distractors$Mean_RT, 2)
-  Distractors$Distractor_Correct <- round(Distractors$Distractor_Correct, 2)
+  Distractors <- Complex_Task %>%
+    dplyr::group_by(Participant, Distractor) %>%
+    dplyr::summarize(RT_Mean = mean(Distractor_RT, na.rm = TRUE),
+                     Distractor_Correct = sum(Distractor_Correct, na.rm = TRUE)/length(Distractor_Correct)) %>%
+    dplyr::ungroup()
 
-  return(list(Between_Participant, Within_Participant, Distractors))
+  return(list(between = Between_Participant, within = Within_Participant, distractors = Distractors))
   }
 

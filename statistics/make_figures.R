@@ -93,7 +93,7 @@ p4
 
 
 p5 <- data_distractors %>%
-  ggplot(aes(x = Correct_Average, RT_Mean)) +
+  ggplot(aes(x = Correct_Average, RT_Average)) +
   geom_point() +
   geom_smooth(method="lm", se=F) +
   labs(x = "Proportion of Correct Responses", y = "Mean Reaction Time") +

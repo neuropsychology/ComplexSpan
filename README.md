@@ -138,4 +138,5 @@ These graphs were produced by make_figures.R
 ![Correct Recall across Set Size](https://github.com/neuropsychology/ComplexSpan/blob/master/statistics/figures/SetSize_RecallCorr.png)
 ![Correct Processing across Set Size](https://github.com/neuropsychology/ComplexSpan/blob/master/statistics/figures/SetSize_ProcessingCorr.png)
 ![Processing RT across Set Size](https://github.com/neuropsychology/ComplexSpan/blob/master/statistics/figures/SetSize_ProcessingRT.png)
+![DistractorsRTVSCorrect](https://github.com/neuropsychology/ComplexSpan/blob/master/statistics/figures/Distractor_RTvsCorrect.png)
 ![Distractors](https://github.com/neuropsychology/ComplexSpan/blob/master/statistics/figures/Distractors.png)

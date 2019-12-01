@@ -24,7 +24,6 @@ for(participant in list.files("./data/")){
 
 
 Freq <- as.data.frame(table(data_distractors$Distractor))$Freq
-
 data_distractors <- data_distractors %>%
   dplyr::group_by(Distractor) %>%
   dplyr::summarize(RT_Average = mean(RT_Mean),
@@ -61,6 +60,7 @@ p1
 
 # Correct Proportion Recall, Processing, and Mean RT across Set Size for each participant
 p2 <- data_within %>%
+  dplyr::mutate(Task = fct_relevel(Task, "Simple", "Complex")) %>%
   ggplot(aes(x = Set_Size, y = Recall_Correct, color = Participant)) +
   geom_line(size = 1) +
   labs(x = "Set Size", y = "Proportion of Correct Recalls") +
@@ -111,6 +111,7 @@ p6 <- data_distractors %>%
   tidyr::pivot_wider(names_from = name, values_from = value) %>%
   ggplot(aes(x = Distractor, y = Average, color = Type)) +
   geom_pointrange(aes(ymin = Min, ymax = Max), size=1) +
+  see::scale_color_flat_d(guide = FALSE) +
   ylab("Mean Reaction Time") +
   coord_flip() +
   see::theme_modern() +

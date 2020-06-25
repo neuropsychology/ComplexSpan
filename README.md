@@ -2,7 +2,6 @@
 
 ![Credits](https://zenodo.org/badge/doi/10.5281/zenodo.3529329.svg)
 
-*Lau, Z. J., Pham, T. T., Makowski, D., & Chen, S-H. A. (2019)*
 
 ![](WM.gif)
 

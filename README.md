@@ -81,7 +81,7 @@ To create **figures**, create a folder called "figures" in your working director
 
 ### Task Components
 
-This is a **Psychopy implementation** of a **composite complex span task** adapted from Gonthier et al. (2015). It comprises of 2 components, the simple span
+This is a **Psychopy implementation** of a **composite complex span task** adapted from [Gonthier et al. (2015)](https://link.springer.com/article/10.3758/s13428-015-0566-3). It comprises of 2 components, the simple span
 and the complex span:
 
 **Simple Span**: Presentation of consonants to be remembered
@@ -139,3 +139,15 @@ These graphs were produced by make_figures.R
 ![Processing RT across Set Size](https://github.com/neuropsychology/ComplexSpan/blob/master/statistics/figures/SetSize_ProcessingRT.png)
 ![DistractorsRTVSCorrect](https://github.com/neuropsychology/ComplexSpan/blob/master/statistics/figures/Distractor_RTvsCorrect.png)
 ![Distractors](https://github.com/neuropsychology/ComplexSpan/blob/master/statistics/figures/Distractors.png)
+
+## Resources
+
+Here are some other resources that may be helpful! 
+
+- Follow PsychoPy updates [here](https://github.com/psychopy/psychopy)
+- Well-documented memory tasks
+  - [Verbal working memory](https://github.com/janakl4us/workingmemory)
+  - [Py-Span-Task](https://github.com/tmalsburg/py-span-task)
+  - [Digit Span](https://github.com/expfactory-experiments/digit-span)
+  - [N Back](https://github.com/elayden/N-Back-for-Matlab)
+  

@@ -113,12 +113,12 @@ and the complex span:
 
 This task can be referenced as follows:
 
-- Lau, Z. J., Pham, T. T., & Makowski, D. (2019). *A Psychopy Implementation of the Complex Span for Working Memory Assessment*. Retrieved from http://doi.org/10.5281/zenodo.3529329
+- Lau, Z. J., Pham, T. T., Makowski, D., & S H Chen, A. (2019). *A Psychopy Implementation of the Complex Span for Working Memory Assessment*. Retrieved from http://doi.org/10.5281/zenodo.3529329
 
 ```
 @misc{complexspan2019,
   title={A Psychopy Implementation of the Complex Span for Working Memory Assessment},
-  author={Lau, Zen J and Pham, Thanh T and Makowski, Dominique},
+  author={Lau, Zen J and Pham, Thanh T and Makowski, Dominique and S H Chen, Annabel},
   month = {nov},
   year = {2019},
   doi = {10.5281/zenodo.3529329},

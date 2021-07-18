@@ -33,9 +33,6 @@ preprocess_WM <- function(path, skip_complexspan=""){
 
 # Utility functions -------------------------------------------------------
 
-# # path <- data[[43]]
-# data <- read.csv(path)
-
 .clean_data <- function(data, skip_complexspan=""){
   
   if (data$participant[1] == skip_complexspan) {

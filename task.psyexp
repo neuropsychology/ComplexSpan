@@ -1,9 +1,10 @@
 ﻿<?xml version="1.0" ?>
-<PsychoPy2experiment encoding="utf-8" version="3.2.4">
+<PsychoPy2experiment encoding="utf-8" version="2021.1.4">
   <Settings>
     <Param name="Audio latency priority" updates="None" val="use prefs" valType="str"/>
     <Param name="Audio lib" updates="None" val="use prefs" valType="str"/>
     <Param name="Completed URL" updates="None" val="" valType="str"/>
+    <Param name="Data file delimiter" updates="None" val="auto" valType="str"/>
     <Param name="Data filename" updates="None" val="u'data/%s_%s_%s' % (expInfo['participant'], expName, expInfo['date'])" valType="code"/>
     <Param name="Enable Escape" updates="None" val="True" valType="bool"/>
     <Param name="Experiment info" updates="None" val="{'participant':'', 'session':'001'}" valType="code"/>
@@ -13,6 +14,7 @@
     <Param name="Incomplete URL" updates="None" val="" valType="str"/>
     <Param name="JS libs" updates="None" val="packaged" valType="str"/>
     <Param name="Monitor" updates="None" val="testMonitor" valType="str"/>
+    <Param name="Resources" updates="None" val="[]" valType="list"/>
     <Param name="Save csv file" updates="None" val="False" valType="bool"/>
     <Param name="Save excel file" updates="None" val="False" valType="bool"/>
     <Param name="Save log file" updates="None" val="True" valType="bool"/>
@@ -36,6 +38,7 @@
       <TextComponent name="instructions">
         <Param name="color" updates="constant" val="black" valType="str"/>
         <Param name="colorSpace" updates="constant" val="rgb" valType="str"/>
+        <Param name="contrast" updates="constant" val="1" valType="num"/>
         <Param name="disabled" updates="None" val="False" valType="bool"/>
         <Param name="durationEstim" updates="None" val="" valType="code"/>
         <Param name="flip" updates="constant" val="" valType="str"/>
@@ -80,6 +83,7 @@
       <TextComponent name="operation">
         <Param name="color" updates="constant" val="black" valType="str"/>
         <Param name="colorSpace" updates="constant" val="rgb" valType="str"/>
+        <Param name="contrast" updates="constant" val="1" valType="num"/>
         <Param name="disabled" updates="None" val="False" valType="bool"/>
         <Param name="durationEstim" updates="None" val="" valType="code"/>
         <Param name="flip" updates="constant" val="" valType="str"/>
@@ -122,6 +126,7 @@
       <TextComponent name="operation_feedback">
         <Param name="color" updates="constant" val="black" valType="str"/>
         <Param name="colorSpace" updates="constant" val="rgb" valType="str"/>
+        <Param name="contrast" updates="constant" val="1" valType="num"/>
         <Param name="disabled" updates="None" val="False" valType="bool"/>
         <Param name="durationEstim" updates="None" val="" valType="code"/>
         <Param name="flip" updates="constant" val="" valType="str"/>
@@ -144,6 +149,8 @@
         <Param name="wrapWidth" updates="constant" val="" valType="code"/>
       </TextComponent>
       <CodeComponent name="code_14">
+        <Param name="Before Experiment" updates="constant" val="" valType="extendedCode"/>
+        <Param name="Before JS Experiment" updates="constant" val="" valType="extendedCode"/>
         <Param name="Begin Experiment" updates="constant" val="RT_list = [] #empty list to hold values" valType="extendedCode"/>
         <Param name="Begin JS Experiment" updates="constant" val="" valType="extendedCode"/>
         <Param name="Begin JS Routine" updates="constant" val="" valType="extendedCode"/>
@@ -161,6 +168,7 @@
       <TextComponent name="instructions_8">
         <Param name="color" updates="constant" val="black" valType="str"/>
         <Param name="colorSpace" updates="constant" val="rgb" valType="str"/>
+        <Param name="contrast" updates="constant" val="1" valType="num"/>
         <Param name="disabled" updates="None" val="False" valType="bool"/>
         <Param name="durationEstim" updates="None" val="" valType="code"/>
         <Param name="flip" updates="constant" val="" valType="str"/>
@@ -185,10 +193,12 @@
     </Routine>
     <Routine name="feedback">
       <CodeComponent name="code">
-        <Param name="Begin Experiment" updates="constant" val="msg = ''&amp;#10;" valType="extendedCode"/>
+        <Param name="Before Experiment" updates="constant" val="" valType="extendedCode"/>
+        <Param name="Before JS Experiment" updates="constant" val="" valType="extendedCode"/>
+        <Param name="Begin Experiment" updates="constant" val="msg = ''&amp;#10;total_number = 0" valType="extendedCode"/>
         <Param name="Begin JS Experiment" updates="constant" val="" valType="extendedCode"/>
         <Param name="Begin JS Routine" updates="constant" val="" valType="extendedCode"/>
-        <Param name="Begin Routine" updates="constant" val="if trials.thisN == 0:&amp;#10;    number_correct = 0&amp;#10;&amp;#10;if (''.join(key_resp.keys) == str(Operation_answer)):&amp;#10;    number_correct = number_correct + 1&amp;#10;    msg='Correct! \nScore = %.1f%%' %(number_correct*100/trials.nTotal)&amp;#10;    msgColor = 'green'&amp;#10;else:&amp;#10;    msg='Oops! That was wrong \nScore = %.1f%%' %(number_correct*100/trials.nTotal)&amp;#10;    msgColor = 'red'" valType="extendedCode"/>
+        <Param name="Begin Routine" updates="constant" val="if trials.thisN == 0:&amp;#10;    number_correct = 0&amp;#10;&amp;#10;if (''.join(key_resp.keys) == str(Operation_answer)):&amp;#10;    total_number += 1&amp;#10;    number_correct = number_correct + 1&amp;#10;    msg='Correct! \nScore = %.1f%%' %(number_correct*100/total_number)&amp;#10;    msgColor = 'green'&amp;#10;else:&amp;#10;    total_number += 1&amp;#10;    msg='Oops! That was wrong \nScore = %.1f%%' %(number_correct*100/total_number)&amp;#10;    msgColor = 'red'" valType="extendedCode"/>
         <Param name="Code Type" updates="None" val="Py" valType="str"/>
         <Param name="Each Frame" updates="constant" val="&amp;#10;&amp;#10;&amp;#10;" valType="extendedCode"/>
         <Param name="Each JS Frame" updates="constant" val="" valType="extendedCode"/>
@@ -202,6 +212,7 @@
       <TextComponent name="feedback_msg">
         <Param name="color" updates="set every repeat" val="$msgColor" valType="str"/>
         <Param name="colorSpace" updates="constant" val="rgb" valType="str"/>
+        <Param name="contrast" updates="constant" val="1" valType="num"/>
         <Param name="disabled" updates="None" val="False" valType="bool"/>
         <Param name="durationEstim" updates="None" val="" valType="code"/>
         <Param name="flip" updates="constant" val="" valType="str"/>
@@ -226,6 +237,8 @@
     </Routine>
     <Routine name="final_feedback">
       <CodeComponent name="code_2">
+        <Param name="Before Experiment" updates="constant" val="" valType="extendedCode"/>
+        <Param name="Before JS Experiment" updates="constant" val="" valType="extendedCode"/>
         <Param name="Begin Experiment" updates="constant" val="proc_msg = ''&amp;#10;sumRT = 0&amp;#10;sumdiff = 0" valType="extendedCode"/>
         <Param name="Begin JS Experiment" updates="constant" val="" valType="extendedCode"/>
         <Param name="Begin JS Routine" updates="constant" val="" valType="extendedCode"/>
@@ -243,6 +256,7 @@
       <TextComponent name="feedback_msg_2">
         <Param name="color" updates="constant" val="black" valType="str"/>
         <Param name="colorSpace" updates="constant" val="rgb" valType="str"/>
+        <Param name="contrast" updates="constant" val="1" valType="num"/>
         <Param name="disabled" updates="None" val="False" valType="bool"/>
         <Param name="durationEstim" updates="None" val="" valType="code"/>
         <Param name="flip" updates="constant" val="" valType="str"/>
@@ -287,6 +301,7 @@
       <TextComponent name="instructions_2">
         <Param name="color" updates="constant" val="black" valType="str"/>
         <Param name="colorSpace" updates="constant" val="rgb" valType="str"/>
+        <Param name="contrast" updates="constant" val="1" valType="num"/>
         <Param name="disabled" updates="None" val="False" valType="bool"/>
         <Param name="durationEstim" updates="None" val="" valType="code"/>
         <Param name="flip" updates="constant" val="" valType="str"/>
@@ -331,6 +346,7 @@
       <TextComponent name="letter">
         <Param name="color" updates="constant" val="white" valType="str"/>
         <Param name="colorSpace" updates="constant" val="rgb" valType="str"/>
+        <Param name="contrast" updates="constant" val="1" valType="num"/>
         <Param name="disabled" updates="None" val="False" valType="bool"/>
         <Param name="durationEstim" updates="None" val="" valType="code"/>
         <Param name="flip" updates="constant" val="" valType="str"/>
@@ -353,6 +369,8 @@
         <Param name="wrapWidth" updates="constant" val="" valType="code"/>
       </TextComponent>
       <CodeComponent name="code_3">
+        <Param name="Before Experiment" updates="constant" val="" valType="extendedCode"/>
+        <Param name="Before JS Experiment" updates="constant" val="" valType="extendedCode"/>
         <Param name="Begin Experiment" updates="constant" val="" valType="extendedCode"/>
         <Param name="Begin JS Experiment" updates="constant" val="" valType="extendedCode"/>
         <Param name="Begin JS Routine" updates="constant" val="" valType="extendedCode"/>
@@ -390,6 +408,7 @@
       <TextComponent name="text_feedback">
         <Param name="color" updates="constant" val="black" valType="str"/>
         <Param name="colorSpace" updates="constant" val="rgb" valType="str"/>
+        <Param name="contrast" updates="constant" val="1" valType="num"/>
         <Param name="disabled" updates="None" val="False" valType="bool"/>
         <Param name="durationEstim" updates="None" val="" valType="code"/>
         <Param name="flip" updates="constant" val="" valType="str"/>
@@ -412,12 +431,14 @@
         <Param name="wrapWidth" updates="constant" val="" valType="code"/>
       </TextComponent>
       <CodeComponent name="code_5">
+        <Param name="Before Experiment" updates="constant" val="" valType="extendedCode"/>
+        <Param name="Before JS Experiment" updates="constant" val="" valType="extendedCode"/>
         <Param name="Begin Experiment" updates="constant" val="total_memory_acc = 0&amp;#10;memory_wrong = 0" valType="extendedCode"/>
         <Param name="Begin JS Experiment" updates="constant" val="" valType="extendedCode"/>
         <Param name="Begin JS Routine" updates="constant" val="" valType="extendedCode"/>
         <Param name="Begin Routine" updates="constant" val="" valType="extendedCode"/>
         <Param name="Code Type" updates="None" val="Py" valType="str"/>
-        <Param name="Each Frame" updates="constant" val="if(&quot;backspace&quot; in key_resp_5.keys):&amp;#10;    key_resp_5.keys.remove(&quot;backspace&quot;) &amp;#10;    &amp;#10;    if(len(key_resp_5.keys) &gt; 0):&amp;#10;        key_resp_5.keys.pop() #remove backspace&amp;#10;        &amp;#10;elif(&quot;return&quot; in key_resp_5.keys):&amp;#10;    key_resp_5.keys.remove(&quot;return&quot;) #remove return&amp;#10;    &amp;#10;    if(len(key_resp_5.keys) &gt; 0):&amp;#10;        screen_text = ''.join(key_resp_5.keys)&amp;#10;        thisExp.addData(&quot;simple_recall&quot;, screen_text) #store response in data file after entering&amp;#10;&amp;#10;    continueRoutine = False&amp;#10;&amp;#10;if(len(key_resp_5.keys) &gt; 20):&amp;#10;    key_resp_5.keys.pop() #prevent typing after 20 keys entered&amp;#10;&amp;#10;&amp;#10;screen_text = ''.join(key_resp_5.keys)&amp;#10;screen_text = screen_text.upper()" valType="extendedCode"/>
+        <Param name="Each Frame" updates="constant" val="if(&quot;backspace&quot; in key_resp_5.keys):&amp;#10;    key_resp_5.keys.remove(&quot;backspace&quot;)&amp;#10;    &amp;#10;    if(len(key_resp_5.keys) &gt; 0):&amp;#10;        key_resp_5.keys.pop() #remove backspace&amp;#10;        print(len(key_resp_5.keys))&amp;#10;        &amp;#10;elif(&quot;return&quot; in key_resp_5.keys):&amp;#10;    key_resp_5.keys.remove(&quot;return&quot;) #remove return&amp;#10;    &amp;#10;    if(len(key_resp_5.keys) &gt; 0):&amp;#10;        screen_text = ''.join(key_resp_5.keys)&amp;#10;        thisExp.addData(&quot;simple_recall&quot;, screen_text) #store response in data file after entering&amp;#10;&amp;#10;    continueRoutine = False&amp;#10;&amp;#10;if(len(key_resp_5.keys) &gt; 20):&amp;#10;    key_resp_5.keys.pop() #prevent typing after 20 keys entered&amp;#10;&amp;#10;&amp;#10;screen_text = ''.join(key_resp_5.keys)&amp;#10;print(screen_text)&amp;#10;screen_text = screen_text.upper()" valType="extendedCode"/>
         <Param name="Each JS Frame" updates="constant" val="" valType="extendedCode"/>
         <Param name="End Experiment" updates="constant" val="" valType="extendedCode"/>
         <Param name="End JS Experiment" updates="constant" val="" valType="extendedCode"/>
@@ -429,6 +450,7 @@
       <TextComponent name="instructions_3">
         <Param name="color" updates="constant" val="black" valType="str"/>
         <Param name="colorSpace" updates="constant" val="rgb" valType="str"/>
+        <Param name="contrast" updates="constant" val="1" valType="num"/>
         <Param name="disabled" updates="None" val="False" valType="bool"/>
         <Param name="durationEstim" updates="None" val="" valType="code"/>
         <Param name="flip" updates="constant" val="" valType="str"/>
@@ -453,6 +475,8 @@
     </Routine>
     <Routine name="initialize">
       <CodeComponent name="code_4">
+        <Param name="Before Experiment" updates="constant" val="" valType="extendedCode"/>
+        <Param name="Before JS Experiment" updates="constant" val="" valType="extendedCode"/>
         <Param name="Begin Experiment" updates="constant" val="" valType="extendedCode"/>
         <Param name="Begin JS Experiment" updates="constant" val="" valType="extendedCode"/>
         <Param name="Begin JS Routine" updates="constant" val="" valType="extendedCode"/>
@@ -472,6 +496,7 @@
       <TextComponent name="text_2">
         <Param name="color" updates="constant" val="black" valType="str"/>
         <Param name="colorSpace" updates="constant" val="rgb" valType="str"/>
+        <Param name="contrast" updates="constant" val="1" valType="num"/>
         <Param name="disabled" updates="None" val="False" valType="bool"/>
         <Param name="durationEstim" updates="None" val="" valType="code"/>
         <Param name="flip" updates="constant" val="" valType="str"/>
@@ -494,6 +519,8 @@
         <Param name="wrapWidth" updates="constant" val="" valType="code"/>
       </TextComponent>
       <CodeComponent name="code_6">
+        <Param name="Before Experiment" updates="constant" val="" valType="extendedCode"/>
+        <Param name="Before JS Experiment" updates="constant" val="" valType="extendedCode"/>
         <Param name="Begin Experiment" updates="constant" val="import random&amp;#10;&amp;#10;stimuli_letters = ['Z', 'Q', 'J', 'H', 'K', 'T', 'S', 'N' , 'R', 'X' ,'L', 'V']&amp;#10;&amp;#10;stimuli_count = 2 &amp;#10;&amp;#10;random.shuffle(stimuli_letters)&amp;#10;&amp;#10;chosen_stimuli = stimuli_letters[0:stimuli_count]&amp;#10;correct_answer = ''.join(chosen_stimuli)&amp;#10;loop_i = 0 #helps to specify which letters to print&amp;#10;&amp;#10;" valType="extendedCode"/>
         <Param name="Begin JS Experiment" updates="constant" val="" valType="extendedCode"/>
         <Param name="Begin JS Routine" updates="constant" val="" valType="extendedCode"/>
@@ -513,6 +540,7 @@
       <TextComponent name="text">
         <Param name="color" updates="constant" val="black" valType="str"/>
         <Param name="colorSpace" updates="constant" val="rgb" valType="str"/>
+        <Param name="contrast" updates="constant" val="1" valType="num"/>
         <Param name="disabled" updates="None" val="False" valType="bool"/>
         <Param name="durationEstim" updates="None" val="" valType="code"/>
         <Param name="flip" updates="constant" val="" valType="str"/>
@@ -535,6 +563,8 @@
         <Param name="wrapWidth" updates="constant" val="" valType="code"/>
       </TextComponent>
       <CodeComponent name="code_9">
+        <Param name="Before Experiment" updates="constant" val="" valType="extendedCode"/>
+        <Param name="Before JS Experiment" updates="constant" val="" valType="extendedCode"/>
         <Param name="Begin Experiment" updates="constant" val="import random&amp;#10;&amp;#10;stimuli_letters = ['Z', 'Q', 'J', 'H', 'K', 'T', 'S', 'N' , 'R', 'X' ,'L', 'V']&amp;#10;&amp;#10;span_count = 2&amp;#10;&amp;#10;random.shuffle(stimuli_letters) #shuffle letters&amp;#10;&amp;#10;chosen_stimuli_2 = stimuli_letters[0:span_count] #choose n letters&amp;#10;&amp;#10;correct_answer_2 = ''.join(chosen_stimuli_2) #join n letters&amp;#10;&amp;#10;loop_i_2 = 0&amp;#10;&amp;#10;" valType="extendedCode"/>
         <Param name="Begin JS Experiment" updates="constant" val="" valType="extendedCode"/>
         <Param name="Begin JS Routine" updates="constant" val="" valType="extendedCode"/>
@@ -554,6 +584,7 @@
       <TextComponent name="operation_2">
         <Param name="color" updates="constant" val="black" valType="str"/>
         <Param name="colorSpace" updates="constant" val="rgb" valType="str"/>
+        <Param name="contrast" updates="constant" val="1" valType="num"/>
         <Param name="disabled" updates="None" val="False" valType="bool"/>
         <Param name="durationEstim" updates="None" val="" valType="code"/>
         <Param name="flip" updates="constant" val="" valType="str"/>
@@ -596,6 +627,7 @@
       <TextComponent name="operation_feedback_3">
         <Param name="color" updates="constant" val="black" valType="str"/>
         <Param name="colorSpace" updates="constant" val="rgb" valType="str"/>
+        <Param name="contrast" updates="constant" val="1" valType="num"/>
         <Param name="disabled" updates="None" val="False" valType="bool"/>
         <Param name="durationEstim" updates="None" val="" valType="code"/>
         <Param name="flip" updates="constant" val="" valType="str"/>
@@ -618,6 +650,8 @@
         <Param name="wrapWidth" updates="constant" val="" valType="code"/>
       </TextComponent>
       <CodeComponent name="code_8">
+        <Param name="Before Experiment" updates="constant" val="" valType="extendedCode"/>
+        <Param name="Before JS Experiment" updates="constant" val="" valType="extendedCode"/>
         <Param name="Begin Experiment" updates="constant" val="" valType="extendedCode"/>
         <Param name="Begin JS Experiment" updates="constant" val="" valType="extendedCode"/>
         <Param name="Begin JS Routine" updates="constant" val="" valType="extendedCode"/>
@@ -635,6 +669,7 @@
       <TextComponent name="instructions_10">
         <Param name="color" updates="constant" val="black" valType="str"/>
         <Param name="colorSpace" updates="constant" val="rgb" valType="str"/>
+        <Param name="contrast" updates="constant" val="1" valType="num"/>
         <Param name="disabled" updates="None" val="False" valType="bool"/>
         <Param name="durationEstim" updates="None" val="" valType="code"/>
         <Param name="flip" updates="constant" val="" valType="str"/>
@@ -679,6 +714,7 @@
       <TextComponent name="text_feedback_2">
         <Param name="color" updates="constant" val="black" valType="str"/>
         <Param name="colorSpace" updates="constant" val="rgb" valType="str"/>
+        <Param name="contrast" updates="constant" val="1" valType="num"/>
         <Param name="disabled" updates="None" val="False" valType="bool"/>
         <Param name="durationEstim" updates="None" val="" valType="code"/>
         <Param name="flip" updates="constant" val="" valType="str"/>
@@ -701,6 +737,8 @@
         <Param name="wrapWidth" updates="constant" val="" valType="code"/>
       </TextComponent>
       <CodeComponent name="code_10">
+        <Param name="Before Experiment" updates="constant" val="" valType="extendedCode"/>
+        <Param name="Before JS Experiment" updates="constant" val="" valType="extendedCode"/>
         <Param name="Begin Experiment" updates="constant" val="total_complex_acc = 0&amp;#10;complex_wrong = 0&amp;#10;" valType="extendedCode"/>
         <Param name="Begin JS Experiment" updates="constant" val="" valType="extendedCode"/>
         <Param name="Begin JS Routine" updates="constant" val="" valType="extendedCode"/>
@@ -718,6 +756,7 @@
       <TextComponent name="instructions_5">
         <Param name="color" updates="constant" val="black" valType="str"/>
         <Param name="colorSpace" updates="constant" val="rgb" valType="str"/>
+        <Param name="contrast" updates="constant" val="1" valType="num"/>
         <Param name="disabled" updates="None" val="False" valType="bool"/>
         <Param name="durationEstim" updates="None" val="" valType="code"/>
         <Param name="flip" updates="constant" val="" valType="str"/>
@@ -744,6 +783,7 @@
       <TextComponent name="finish">
         <Param name="color" updates="constant" val="black" valType="str"/>
         <Param name="colorSpace" updates="constant" val="rgb" valType="str"/>
+        <Param name="contrast" updates="constant" val="1" valType="num"/>
         <Param name="disabled" updates="None" val="False" valType="bool"/>
         <Param name="durationEstim" updates="None" val="" valType="code"/>
         <Param name="flip" updates="constant" val="" valType="str"/>
@@ -789,6 +829,7 @@
       <TextComponent name="text_3">
         <Param name="color" updates="constant" val="black" valType="str"/>
         <Param name="colorSpace" updates="constant" val="rgb" valType="str"/>
+        <Param name="contrast" updates="constant" val="1" valType="num"/>
         <Param name="disabled" updates="None" val="False" valType="bool"/>
         <Param name="durationEstim" updates="None" val="" valType="code"/>
         <Param name="flip" updates="constant" val="" valType="str"/>
@@ -811,6 +852,8 @@
         <Param name="wrapWidth" updates="constant" val="" valType="code"/>
       </TextComponent>
       <CodeComponent name="code_7">
+        <Param name="Before Experiment" updates="constant" val="" valType="extendedCode"/>
+        <Param name="Before JS Experiment" updates="constant" val="" valType="extendedCode"/>
         <Param name="Begin Experiment" updates="constant" val="import random&amp;#10;&amp;#10;stimuli_letters = ['Z', 'Q', 'J', 'H', 'K', 'T', 'S', 'N' , 'R', 'X' ,'L', 'V']&amp;#10;&amp;#10;random.shuffle(stimuli_letters) #shuffle letters&amp;#10;&amp;#10;chosen_stimuli_3 = stimuli_letters[0:2] #choose 2 letters&amp;#10;&amp;#10;correct_answer_3 = ''.join(chosen_stimuli_3) #join 2 letters&amp;#10;&amp;#10;loop_i_3 = 0&amp;#10;&amp;#10;" valType="extendedCode"/>
         <Param name="Begin JS Experiment" updates="constant" val="" valType="extendedCode"/>
         <Param name="Begin JS Routine" updates="constant" val="" valType="extendedCode"/>
@@ -848,6 +891,7 @@
       <TextComponent name="text_feedback_3">
         <Param name="color" updates="constant" val="black" valType="str"/>
         <Param name="colorSpace" updates="constant" val="rgb" valType="str"/>
+        <Param name="contrast" updates="constant" val="1" valType="num"/>
         <Param name="disabled" updates="None" val="False" valType="bool"/>
         <Param name="durationEstim" updates="None" val="" valType="code"/>
         <Param name="flip" updates="constant" val="" valType="str"/>
@@ -870,6 +914,8 @@
         <Param name="wrapWidth" updates="constant" val="" valType="code"/>
       </TextComponent>
       <CodeComponent name="code_11">
+        <Param name="Before Experiment" updates="constant" val="" valType="extendedCode"/>
+        <Param name="Before JS Experiment" updates="constant" val="" valType="extendedCode"/>
         <Param name="Begin Experiment" updates="constant" val="" valType="extendedCode"/>
         <Param name="Begin JS Experiment" updates="constant" val="" valType="extendedCode"/>
         <Param name="Begin JS Routine" updates="constant" val="" valType="extendedCode"/>
@@ -887,6 +933,7 @@
       <TextComponent name="instructions_6">
         <Param name="color" updates="constant" val="black" valType="str"/>
         <Param name="colorSpace" updates="constant" val="rgb" valType="str"/>
+        <Param name="contrast" updates="constant" val="1" valType="num"/>
         <Param name="disabled" updates="None" val="False" valType="bool"/>
         <Param name="durationEstim" updates="None" val="" valType="code"/>
         <Param name="flip" updates="constant" val="" valType="str"/>
@@ -913,6 +960,7 @@
       <TextComponent name="instructions_4">
         <Param name="color" updates="constant" val="black" valType="str"/>
         <Param name="colorSpace" updates="constant" val="rgb" valType="str"/>
+        <Param name="contrast" updates="constant" val="1" valType="num"/>
         <Param name="disabled" updates="None" val="False" valType="bool"/>
         <Param name="durationEstim" updates="None" val="" valType="code"/>
         <Param name="flip" updates="constant" val="" valType="str"/>
@@ -957,6 +1005,7 @@
       <TextComponent name="instructions_7">
         <Param name="color" updates="constant" val="black" valType="str"/>
         <Param name="colorSpace" updates="constant" val="rgb" valType="str"/>
+        <Param name="contrast" updates="constant" val="1" valType="num"/>
         <Param name="disabled" updates="None" val="False" valType="bool"/>
         <Param name="durationEstim" updates="None" val="" valType="code"/>
         <Param name="flip" updates="constant" val="" valType="str"/>
@@ -999,6 +1048,8 @@
     </Routine>
     <Routine name="feedback_2">
       <CodeComponent name="code_12">
+        <Param name="Before Experiment" updates="constant" val="" valType="extendedCode"/>
+        <Param name="Before JS Experiment" updates="constant" val="" valType="extendedCode"/>
         <Param name="Begin Experiment" updates="constant" val="msg2 = ''&amp;#10;prac_acc = 0" valType="extendedCode"/>
         <Param name="Begin JS Experiment" updates="constant" val="" valType="extendedCode"/>
         <Param name="Begin JS Routine" updates="constant" val="" valType="extendedCode"/>
@@ -1016,6 +1067,7 @@
       <TextComponent name="feedback_msg_3">
         <Param name="color" updates="set every repeat" val="$msg2Color" valType="str"/>
         <Param name="colorSpace" updates="constant" val="rgb" valType="str"/>
+        <Param name="contrast" updates="constant" val="1" valType="num"/>
         <Param name="disabled" updates="None" val="False" valType="bool"/>
         <Param name="durationEstim" updates="None" val="" valType="code"/>
         <Param name="flip" updates="constant" val="" valType="str"/>
@@ -1042,6 +1094,7 @@
       <TextComponent name="operation_3">
         <Param name="color" updates="constant" val="black" valType="str"/>
         <Param name="colorSpace" updates="constant" val="rgb" valType="str"/>
+        <Param name="contrast" updates="constant" val="1" valType="num"/>
         <Param name="disabled" updates="None" val="False" valType="bool"/>
         <Param name="durationEstim" updates="None" val="" valType="code"/>
         <Param name="flip" updates="constant" val="" valType="str"/>
@@ -1084,6 +1137,7 @@
       <TextComponent name="operation_feedback_2">
         <Param name="color" updates="constant" val="black" valType="str"/>
         <Param name="colorSpace" updates="constant" val="rgb" valType="str"/>
+        <Param name="contrast" updates="constant" val="1" valType="num"/>
         <Param name="disabled" updates="None" val="False" valType="bool"/>
         <Param name="durationEstim" updates="None" val="" valType="code"/>
         <Param name="flip" updates="constant" val="" valType="str"/>
@@ -1106,6 +1160,8 @@
         <Param name="wrapWidth" updates="constant" val="" valType="code"/>
       </TextComponent>
       <CodeComponent name="code_13">
+        <Param name="Before Experiment" updates="constant" val="" valType="extendedCode"/>
+        <Param name="Before JS Experiment" updates="constant" val="" valType="extendedCode"/>
         <Param name="Begin Experiment" updates="constant" val="" valType="extendedCode"/>
         <Param name="Begin JS Experiment" updates="constant" val="" valType="extendedCode"/>
         <Param name="Begin JS Routine" updates="constant" val="" valType="extendedCode"/>
@@ -1123,6 +1179,7 @@
       <TextComponent name="instructions_9">
         <Param name="color" updates="constant" val="black" valType="str"/>
         <Param name="colorSpace" updates="constant" val="rgb" valType="str"/>
+        <Param name="contrast" updates="constant" val="1" valType="num"/>
         <Param name="disabled" updates="None" val="False" valType="bool"/>
         <Param name="durationEstim" updates="None" val="" valType="code"/>
         <Param name="flip" updates="constant" val="" valType="str"/>
@@ -1147,6 +1204,8 @@
     </Routine>
     <Routine name="feedback_quick">
       <CodeComponent name="code_15">
+        <Param name="Before Experiment" updates="constant" val="" valType="extendedCode"/>
+        <Param name="Before JS Experiment" updates="constant" val="" valType="extendedCode"/>
         <Param name="Begin Experiment" updates="constant" val="msg3 = ''&amp;#10;loop_o = 0&amp;#10;number_correct_2 = 0" valType="extendedCode"/>
         <Param name="Begin JS Experiment" updates="constant" val="" valType="extendedCode"/>
         <Param name="Begin JS Routine" updates="constant" val="" valType="extendedCode"/>
@@ -1164,6 +1223,7 @@
       <TextComponent name="feedback_msg_4">
         <Param name="color" updates="set every repeat" val="$msg3Color" valType="str"/>
         <Param name="colorSpace" updates="constant" val="rgb" valType="str"/>
+        <Param name="contrast" updates="constant" val="1" valType="num"/>
         <Param name="disabled" updates="None" val="False" valType="bool"/>
         <Param name="durationEstim" updates="None" val="" valType="code"/>
         <Param name="flip" updates="constant" val="" valType="str"/>
@@ -1188,6 +1248,7 @@
       <TextComponent name="operation_4">
         <Param name="color" updates="constant" val="black" valType="str"/>
         <Param name="colorSpace" updates="constant" val="rgb" valType="str"/>
+        <Param name="contrast" updates="constant" val="1" valType="num"/>
         <Param name="disabled" updates="None" val="False" valType="bool"/>
         <Param name="durationEstim" updates="None" val="" valType="code"/>
         <Param name="flip" updates="constant" val="" valType="str"/>
@@ -1212,6 +1273,8 @@
     </Routine>
     <Routine name="feedback_quick_2">
       <CodeComponent name="code_16">
+        <Param name="Before Experiment" updates="constant" val="" valType="extendedCode"/>
+        <Param name="Before JS Experiment" updates="constant" val="" valType="extendedCode"/>
         <Param name="Begin Experiment" updates="constant" val="msg4 = ''&amp;#10;loop_o_2 = 0&amp;#10;number_correct_3 = 0" valType="extendedCode"/>
         <Param name="Begin JS Experiment" updates="constant" val="" valType="extendedCode"/>
         <Param name="Begin JS Routine" updates="constant" val="" valType="extendedCode"/>
@@ -1229,6 +1292,7 @@
       <TextComponent name="feedback_msg_5">
         <Param name="color" updates="set every repeat" val="$msg4Color" valType="str"/>
         <Param name="colorSpace" updates="constant" val="rgb" valType="str"/>
+        <Param name="contrast" updates="constant" val="1" valType="num"/>
         <Param name="disabled" updates="None" val="False" valType="bool"/>
         <Param name="durationEstim" updates="None" val="" valType="code"/>
         <Param name="flip" updates="constant" val="" valType="str"/>
@@ -1253,6 +1317,7 @@
       <TextComponent name="operation_5">
         <Param name="color" updates="constant" val="black" valType="str"/>
         <Param name="colorSpace" updates="constant" val="rgb" valType="str"/>
+        <Param name="contrast" updates="constant" val="1" valType="num"/>
         <Param name="disabled" updates="None" val="False" valType="bool"/>
         <Param name="durationEstim" updates="None" val="" valType="code"/>
         <Param name="flip" updates="constant" val="" valType="str"/>
@@ -1318,8 +1383,8 @@
     </LoopInitiator>
     <LoopInitiator loopType="TrialHandler" name="trials">
       <Param name="Selected rows" updates="None" val="" valType="str"/>
-      <Param name="conditions" updates="None" val="[OrderedDict([('Task', 'Practice'), ('Trial', 1), ('Problem', '(1x2) + 1'), ('Operation_answer', 3)]), OrderedDict([('Task', 'Practice'), ('Trial', 2), ('Problem', '(1/1) - 1'), ('Operation_answer', 0)]), OrderedDict([('Task', 'Practice'), ('Trial', 3), ('Problem', '(7x2) - 5'), ('Operation_answer', 9)]), OrderedDict([('Task', 'Practice'), ('Trial', 4), ('Problem', '(4x4) - 14'), ('Operation_answer', 2)]), OrderedDict([('Task', 'Practice'), ('Trial', 5), ('Problem', '(3/3) + 2'), ('Operation_answer', 3)]), OrderedDict([('Task', 'Practice'), ('Trial', 6), ('Problem', '(2x6) - 8'), ('Operation_answer', 4)]), OrderedDict([('Task', 'Practice'), ('Trial', 7), ('Problem', '(4x6) - 17'), ('Operation_answer', 7)]), OrderedDict([('Task', 'Practice'), ('Trial', 8), ('Problem', '(3/3) + 5'), ('Operation_answer', 6)]), OrderedDict([('Task', 'Practice'), ('Trial', 9), ('Problem', '(4/2) + 5'), ('Operation_answer', 7)]), OrderedDict([('Task', 'Practice'), ('Trial', 10), ('Problem', '(8/4) + 3'), ('Operation_answer', 5)]), OrderedDict([('Task', 'Practice'), ('Trial', 11), ('Problem', '(5x3) - 7'), ('Operation_answer', 8)]), OrderedDict([('Task', 'Practice'), ('Trial', 12), ('Problem', '(8/2) + 4'), ('Operation_answer', 8)]), OrderedDict([('Task', 'Practice'), ('Trial', 13), ('Problem', '(3x8) - 19 '), ('Operation_answer', 5)]), OrderedDict([('Task', 'Practice'), ('Trial', 14), ('Problem', '(6/3) + 4 '), ('Operation_answer', 6)]), OrderedDict([('Task', 'Practice'), ('Trial', 15), ('Problem', '(9/3) - 2'), ('Operation_answer', 1)])]" valType="str"/>
-      <Param name="conditionsFile" updates="None" val="..\materials\processing_only_2.xlsx" valType="str"/>
+      <Param name="conditions" updates="None" val="[{'Task': 'Practice', 'Trial': 1, 'Problem': '(1x2) + 1', 'Operation_answer': 3}, {'Task': 'Practice', 'Trial': 2, 'Problem': '(1/1) - 1', 'Operation_answer': 0}, {'Task': 'Practice', 'Trial': 3, 'Problem': '(7x2) - 5', 'Operation_answer': 9}, {'Task': 'Practice', 'Trial': 4, 'Problem': '(4x4) - 14', 'Operation_answer': 2}, {'Task': 'Practice', 'Trial': 5, 'Problem': '(3/3) + 2', 'Operation_answer': 3}, {'Task': 'Practice', 'Trial': 6, 'Problem': '(2x6) - 8', 'Operation_answer': 4}, {'Task': 'Practice', 'Trial': 7, 'Problem': '(4x6) - 17', 'Operation_answer': 7}, {'Task': 'Practice', 'Trial': 8, 'Problem': '(3/3) + 5', 'Operation_answer': 6}, {'Task': 'Practice', 'Trial': 9, 'Problem': '(4/2) + 5', 'Operation_answer': 7}, {'Task': 'Practice', 'Trial': 10, 'Problem': '(8/4) + 3', 'Operation_answer': 5}, {'Task': 'Practice', 'Trial': 11, 'Problem': '(5x3) - 7', 'Operation_answer': 8}, {'Task': 'Practice', 'Trial': 12, 'Problem': '(8/2) + 4', 'Operation_answer': 8}, {'Task': 'Practice', 'Trial': 13, 'Problem': '(3x8) - 19 ', 'Operation_answer': 5}, {'Task': 'Practice', 'Trial': 14, 'Problem': '(6/3) + 4 ', 'Operation_answer': 6}, {'Task': 'Practice', 'Trial': 15, 'Problem': '(9/3) - 2', 'Operation_answer': 1}]" valType="str"/>
+      <Param name="conditionsFile" updates="None" val="resources/processing_only_2.xlsx" valType="str"/>
       <Param name="endPoints" updates="None" val="[0, 1]" valType="num"/>
       <Param name="isTrials" updates="None" val="True" valType="bool"/>
       <Param name="loopType" updates="None" val="random" valType="str"/>
@@ -1357,8 +1422,8 @@
     </LoopInitiator>
     <LoopInitiator loopType="TrialHandler" name="repeat_if_wrong_prac">
       <Param name="Selected rows" updates="None" val="" valType="str"/>
-      <Param name="conditions" updates="None" val="[OrderedDict([('Task', 'Practice'), ('Trial', 1), ('Problem', '(1x2) + 1'), ('Operation_answer', 3)]), OrderedDict([('Task', 'Practice'), ('Trial', 2), ('Problem', '(1/1) - 1'), ('Operation_answer', 0)]), OrderedDict([('Task', 'Practice'), ('Trial', 3), ('Problem', '(7x2) - 5'), ('Operation_answer', 9)]), OrderedDict([('Task', 'Practice'), ('Trial', 4), ('Problem', '(4x4) - 14'), ('Operation_answer', 2)]), OrderedDict([('Task', 'Practice'), ('Trial', 5), ('Problem', '(3/3) + 2'), ('Operation_answer', 3)]), OrderedDict([('Task', 'Practice'), ('Trial', 6), ('Problem', '(2x6) - 8'), ('Operation_answer', 4)]), OrderedDict([('Task', 'Practice'), ('Trial', 7), ('Problem', '(4x6) - 17'), ('Operation_answer', 7)]), OrderedDict([('Task', 'Practice'), ('Trial', 8), ('Problem', '(3/3) + 5'), ('Operation_answer', 6)]), OrderedDict([('Task', 'Practice'), ('Trial', 9), ('Problem', '(4/2) + 5'), ('Operation_answer', 7)]), OrderedDict([('Task', 'Practice'), ('Trial', 10), ('Problem', '(8/4) + 3'), ('Operation_answer', 5)]), OrderedDict([('Task', 'Practice'), ('Trial', 11), ('Problem', '(5x3) - 7'), ('Operation_answer', 8)]), OrderedDict([('Task', 'Practice'), ('Trial', 12), ('Problem', '(8/2) + 4'), ('Operation_answer', 8)]), OrderedDict([('Task', 'Practice'), ('Trial', 13), ('Problem', '(3x8) - 19 '), ('Operation_answer', 5)]), OrderedDict([('Task', 'Practice'), ('Trial', 14), ('Problem', '(6/3) + 4 '), ('Operation_answer', 6)]), OrderedDict([('Task', 'Practice'), ('Trial', 15), ('Problem', '(9/3) - 2'), ('Operation_answer', 1)])]" valType="str"/>
-      <Param name="conditionsFile" updates="None" val="..\materials\processing_only_2.xlsx" valType="str"/>
+      <Param name="conditions" updates="None" val="[{'Task': 'Practice', 'Trial': 1, 'Problem': '(1x2) + 1', 'Operation_answer': 3}, {'Task': 'Practice', 'Trial': 2, 'Problem': '(1/1) - 1', 'Operation_answer': 0}, {'Task': 'Practice', 'Trial': 3, 'Problem': '(7x2) - 5', 'Operation_answer': 9}, {'Task': 'Practice', 'Trial': 4, 'Problem': '(4x4) - 14', 'Operation_answer': 2}, {'Task': 'Practice', 'Trial': 5, 'Problem': '(3/3) + 2', 'Operation_answer': 3}, {'Task': 'Practice', 'Trial': 6, 'Problem': '(2x6) - 8', 'Operation_answer': 4}, {'Task': 'Practice', 'Trial': 7, 'Problem': '(4x6) - 17', 'Operation_answer': 7}, {'Task': 'Practice', 'Trial': 8, 'Problem': '(3/3) + 5', 'Operation_answer': 6}, {'Task': 'Practice', 'Trial': 9, 'Problem': '(4/2) + 5', 'Operation_answer': 7}, {'Task': 'Practice', 'Trial': 10, 'Problem': '(8/4) + 3', 'Operation_answer': 5}, {'Task': 'Practice', 'Trial': 11, 'Problem': '(5x3) - 7', 'Operation_answer': 8}, {'Task': 'Practice', 'Trial': 12, 'Problem': '(8/2) + 4', 'Operation_answer': 8}, {'Task': 'Practice', 'Trial': 13, 'Problem': '(3x8) - 19 ', 'Operation_answer': 5}, {'Task': 'Practice', 'Trial': 14, 'Problem': '(6/3) + 4 ', 'Operation_answer': 6}, {'Task': 'Practice', 'Trial': 15, 'Problem': '(9/3) - 2', 'Operation_answer': 1}]" valType="str"/>
+      <Param name="conditionsFile" updates="None" val="resources/processing_only_2.xlsx" valType="str"/>
       <Param name="endPoints" updates="None" val="[0, 1]" valType="num"/>
       <Param name="isTrials" updates="None" val="True" valType="bool"/>
       <Param name="loopType" updates="None" val="random" valType="str"/>
@@ -1399,8 +1464,8 @@
     </LoopInitiator>
     <LoopInitiator loopType="TrialHandler" name="repeat_if_wrong">
       <Param name="Selected rows" updates="None" val="" valType="str"/>
-      <Param name="conditions" updates="None" val="[OrderedDict([('Task', 'Practice'), ('Trial', 1), ('Problem', '(1x2) + 1'), ('Operation_answer', 3)]), OrderedDict([('Task', 'Practice'), ('Trial', 2), ('Problem', '(1/1) - 1'), ('Operation_answer', 0)]), OrderedDict([('Task', 'Practice'), ('Trial', 3), ('Problem', '(7x2) - 5'), ('Operation_answer', 9)]), OrderedDict([('Task', 'Practice'), ('Trial', 4), ('Problem', '(4x4) - 14'), ('Operation_answer', 2)]), OrderedDict([('Task', 'Practice'), ('Trial', 5), ('Problem', '(3/3) + 2'), ('Operation_answer', 3)]), OrderedDict([('Task', 'Practice'), ('Trial', 6), ('Problem', '(2x6) - 8'), ('Operation_answer', 4)]), OrderedDict([('Task', 'Practice'), ('Trial', 7), ('Problem', '(4x6) - 17'), ('Operation_answer', 7)]), OrderedDict([('Task', 'Practice'), ('Trial', 8), ('Problem', '(3/3) + 5'), ('Operation_answer', 6)]), OrderedDict([('Task', 'Practice'), ('Trial', 9), ('Problem', '(4/2) + 5'), ('Operation_answer', 7)]), OrderedDict([('Task', 'Practice'), ('Trial', 10), ('Problem', '(8/4) + 3'), ('Operation_answer', 5)]), OrderedDict([('Task', 'Practice'), ('Trial', 11), ('Problem', '(5x3) - 7'), ('Operation_answer', 8)]), OrderedDict([('Task', 'Practice'), ('Trial', 12), ('Problem', '(8/2) + 4'), ('Operation_answer', 8)]), OrderedDict([('Task', 'Practice'), ('Trial', 13), ('Problem', '(3x8) - 19 '), ('Operation_answer', 5)]), OrderedDict([('Task', 'Practice'), ('Trial', 14), ('Problem', '(6/3) + 4 '), ('Operation_answer', 6)]), OrderedDict([('Task', 'Practice'), ('Trial', 15), ('Problem', '(9/3) - 2'), ('Operation_answer', 1)])]" valType="str"/>
-      <Param name="conditionsFile" updates="None" val="..\materials\processing_only_2.xlsx" valType="str"/>
+      <Param name="conditions" updates="None" val="[{'Task': 'Practice', 'Trial': 1, 'Problem': '(1x2) + 1', 'Operation_answer': 3}, {'Task': 'Practice', 'Trial': 2, 'Problem': '(1/1) - 1', 'Operation_answer': 0}, {'Task': 'Practice', 'Trial': 3, 'Problem': '(7x2) - 5', 'Operation_answer': 9}, {'Task': 'Practice', 'Trial': 4, 'Problem': '(4x4) - 14', 'Operation_answer': 2}, {'Task': 'Practice', 'Trial': 5, 'Problem': '(3/3) + 2', 'Operation_answer': 3}, {'Task': 'Practice', 'Trial': 6, 'Problem': '(2x6) - 8', 'Operation_answer': 4}, {'Task': 'Practice', 'Trial': 7, 'Problem': '(4x6) - 17', 'Operation_answer': 7}, {'Task': 'Practice', 'Trial': 8, 'Problem': '(3/3) + 5', 'Operation_answer': 6}, {'Task': 'Practice', 'Trial': 9, 'Problem': '(4/2) + 5', 'Operation_answer': 7}, {'Task': 'Practice', 'Trial': 10, 'Problem': '(8/4) + 3', 'Operation_answer': 5}, {'Task': 'Practice', 'Trial': 11, 'Problem': '(5x3) - 7', 'Operation_answer': 8}, {'Task': 'Practice', 'Trial': 12, 'Problem': '(8/2) + 4', 'Operation_answer': 8}, {'Task': 'Practice', 'Trial': 13, 'Problem': '(3x8) - 19 ', 'Operation_answer': 5}, {'Task': 'Practice', 'Trial': 14, 'Problem': '(6/3) + 4 ', 'Operation_answer': 6}, {'Task': 'Practice', 'Trial': 15, 'Problem': '(9/3) - 2', 'Operation_answer': 1}]" valType="str"/>
+      <Param name="conditionsFile" updates="None" val="resources/processing_only_2.xlsx" valType="str"/>
       <Param name="endPoints" updates="None" val="[0, 1]" valType="num"/>
       <Param name="isTrials" updates="None" val="True" valType="bool"/>
       <Param name="loopType" updates="None" val="random" valType="str"/>

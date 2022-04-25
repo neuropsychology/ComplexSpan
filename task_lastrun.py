@@ -2,7 +2,7 @@
 # -*- coding: utf-8 -*-
 """
 This experiment was created using PsychoPy3 Experiment Builder (v2021.1.4),
-    on Mon Apr 25 11:36:21 2022
+    on Mon Apr 25 14:23:09 2022
 If you publish work using this script the most relevant publication is:
 
     Peirce J, Gray JR, Simpson S, MacAskill M, Höchenberger R, Sogo H, Kastman E, Lindeløv JK. (2019) 
@@ -314,7 +314,7 @@ operation_2 = visual.TextStim(win=win, name='operation_2',
     depth=0.0);
 key_resp_7 = keyboard.Keyboard()
 operation_feedback_3 = visual.TextStim(win=win, name='operation_feedback_3',
-    text='',
+    text=None,
     font='Arial',
     pos=(0, -0.25), height=0.1, wrapWidth=None, ori=0, 
     color='black', colorSpace='rgb', opacity=1, 
@@ -2276,7 +2276,7 @@ for thisSpan_recall in span_recall:
                         win.timeOnFlip(operation_feedback_3, 'tStopRefresh')  # time at next scr refresh
                         operation_feedback_3.setAutoDraw(False)
                 if operation_feedback_3.status == STARTED:  # only update if drawing
-                    operation_feedback_3.setText(operation_text_3)
+                    operation_feedback_3.setText('')
                 if(len(key_resp_7.keys) > 0):
                     operation_text_3 = ''.join(key_resp_7.keys)
                     thisExp.addData("digit_answer", operation_text_3) #store response in data file after entering

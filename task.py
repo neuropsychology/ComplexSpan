@@ -2,7 +2,7 @@
 # -*- coding: utf-8 -*-
 """
 This experiment was created using PsychoPy3 Experiment Builder (v2021.1.4),
-    on Fri Mar  4 18:28:09 2022
+    on Wed Apr  6 17:24:11 2022
 If you publish work using this script the most relevant publication is:
 
     Peirce J, Gray JR, Simpson S, MacAskill M, Höchenberger R, Sogo H, Kastman E, Lindeløv JK. (2019) 
@@ -51,7 +51,7 @@ filename = _thisDir + os.sep + u'data/%s_%s_%s' % (expInfo['participant'], expNa
 # An ExperimentHandler isn't essential but helps with data saving
 thisExp = data.ExperimentHandler(name=expName, version='',
     extraInfo=expInfo, runtimeInfo=None,
-    originPath='/Users/mikolaj/Desktop/doktorat/ComplexSpan/psychopy/task.py',
+    originPath='/Users/mikolaj/Desktop/doktorat/ComplexSpan/task.py',
     savePickle=True, saveWideText=True,
     dataFileName=filename)
 # save a log file for detail verbose info
@@ -100,19 +100,9 @@ text_2 = visual.TextStim(win=win, name='text_2',
     color='black', colorSpace='rgb', opacity=1, 
     languageStyle='LTR',
     depth=0.0);
-import random
-
-stimuli_letters = ['Z', 'Q', 'J', 'H', 'K', 'T', 'S', 'N' , 'R', 'X' ,'L', 'V']
-
-stimuli_count = 2 
-
-random.shuffle(stimuli_letters)
-
-chosen_stimuli = stimuli_letters[0:stimuli_count]
-correct_answer = ''.join(chosen_stimuli)
-loop_i = 0 #helps to specify which letters to print
-
-
+stimuli_count = 2
+correct_answers = []
+stimuli = 'Z'
 
 # Initialize components for Routine "recall"
 recallClock = core.Clock()
@@ -126,6 +116,7 @@ text_feedback = visual.TextStim(win=win, name='text_feedback',
     depth=-1.0);
 total_memory_acc = 0
 memory_wrong = 0
+screen_text = ''
 instructions_3 = visual.TextStim(win=win, name='instructions_3',
     text='',
     font='Arial',
@@ -156,13 +147,14 @@ operation = visual.TextStim(win=win, name='operation',
     depth=0.0);
 key_resp = keyboard.Keyboard()
 operation_feedback = visual.TextStim(win=win, name='operation_feedback',
-    text='',
+    text=None,
     font='Arial',
     pos=(0, -0.25), height=0.1, wrapWidth=None, ori=0, 
     color='black', colorSpace='rgb', opacity=1, 
     languageStyle='LTR',
     depth=-2.0);
 RT_list = [] #empty list to hold values
+operation_text = ''
 instructions_8 = visual.TextStim(win=win, name='instructions_8',
     text='',
     font='Arial',
@@ -174,7 +166,7 @@ instructions_8 = visual.TextStim(win=win, name='instructions_8',
 # Initialize components for Routine "feedback"
 feedbackClock = core.Clock()
 msg = ''
-
+total_number = 0
 feedback_msg = visual.TextStim(win=win, name='feedback_msg',
     text='',
     font='Arial',
@@ -219,7 +211,7 @@ operation_3 = visual.TextStim(win=win, name='operation_3',
     depth=0.0);
 key_resp_11 = keyboard.Keyboard()
 operation_feedback_2 = visual.TextStim(win=win, name='operation_feedback_2',
-    text='',
+    text=None,
     font='Arial',
     pos=(0, -0.25), height=0.1, wrapWidth=None, ori=0, 
     color='black', colorSpace='rgb', opacity=1, 
@@ -262,17 +254,8 @@ text_3 = visual.TextStim(win=win, name='text_3',
     color='black', colorSpace='rgb', opacity=1, 
     languageStyle='LTR',
     depth=0.0);
-import random
-
-stimuli_letters = ['Z', 'Q', 'J', 'H', 'K', 'T', 'S', 'N' , 'R', 'X' ,'L', 'V']
-
-random.shuffle(stimuli_letters) #shuffle letters
-
-chosen_stimuli_3 = stimuli_letters[0:2] #choose 2 letters
-
-correct_answer_3 = ''.join(chosen_stimuli_3) #join 2 letters
-
-loop_i_3 = 0
+correct_answers_2 = []
+stimuli_2 = 'Z'
 
 
 
@@ -286,6 +269,9 @@ text_feedback_3 = visual.TextStim(win=win, name='text_feedback_3',
     color='black', colorSpace='rgb', opacity=1, 
     languageStyle='LTR',
     depth=-1.0);
+total_memory_acc_2 = 0
+memory_wrong_2 = 0
+screen_text_3 = ''
 instructions_6 = visual.TextStim(win=win, name='instructions_6',
     text='',
     font='Arial',
@@ -371,21 +357,9 @@ text = visual.TextStim(win=win, name='text',
     color='black', colorSpace='rgb', opacity=1, 
     languageStyle='LTR',
     depth=0.0);
-import random
-
-stimuli_letters = ['Z', 'Q', 'J', 'H', 'K', 'T', 'S', 'N' , 'R', 'X' ,'L', 'V']
-
 span_count = 2
-
-random.shuffle(stimuli_letters) #shuffle letters
-
-chosen_stimuli_2 = stimuli_letters[0:span_count] #choose n letters
-
-correct_answer_2 = ''.join(chosen_stimuli_2) #join n letters
-
-loop_i_2 = 0
-
-
+correct_answers_3 = []
+stimuli_3 = 'Z'
 
 # Initialize components for Routine "recall_2"
 recall_2Clock = core.Clock()
@@ -399,7 +373,7 @@ text_feedback_2 = visual.TextStim(win=win, name='text_feedback_2',
     depth=-1.0);
 total_complex_acc = 0
 complex_wrong = 0
-
+screen_text_2 = ''
 instructions_5 = visual.TextStim(win=win, name='instructions_5',
     text='',
     font='Arial',
@@ -541,7 +515,7 @@ for thisNext_level in next_level:
     # set up handler to look after randomisation of conditions etc
     next_letter = data.TrialHandler(nReps=stimuli_count, method='random', 
         extraInfo=expInfo, originPath=-1,
-        trialList=[None],
+        trialList=data.importConditions('resources/letters.csv'),
         seed=None, name='next_letter')
     thisExp.addLoop(next_letter)  # add the loop to the experiment
     thisNext_letter = next_letter.trialList[0]  # so we can initialise stimuli with some values
@@ -561,8 +535,12 @@ for thisNext_level in next_level:
         continueRoutine = True
         routineTimer.add(1.300000)
         # update component parameters for each repeat
-        text_2.setText(chosen_stimuli[loop_i])
-        loop_i += 1
+        text_2.setText(stimuli)
+        import random
+        correct_answers.append(stimuli)
+        letter = letter.split(' ')
+        stimuli = random.choice(letter)
+        
         
         # keep track of which components have finished
         show_lettersComponents = [text_2]
@@ -628,8 +606,6 @@ for thisNext_level in next_level:
                 thisComponent.setAutoDraw(False)
         next_letter.addData('text_2.started', text_2.tStartRefresh)
         next_letter.addData('text_2.stopped', text_2.tStopRefresh)
-        thisExp.nextEntry()
-        
     # completed stimuli_count repeats of 'next_letter'
     
     
@@ -685,7 +661,7 @@ for thisNext_level in next_level:
                 key_resp_5.rt = [key.rt for key in _key_resp_5_allKeys]
         
         # *text_feedback* updates
-        if text_feedback.status == NOT_STARTED and tThisFlip >= 0.5-frameTolerance:
+        if text_feedback.status == NOT_STARTED and tThisFlip >= 0-frameTolerance:
             # keep track of start time/frame for later
             text_feedback.frameNStart = frameN  # exact frame index
             text_feedback.tStart = t  # local t and not account for scr refresh
@@ -695,27 +671,30 @@ for thisNext_level in next_level:
         if text_feedback.status == STARTED:  # only update if drawing
             text_feedback.setText(screen_text
 )
-        if("backspace" in key_resp_5.keys):
-            key_resp_5.keys.remove("backspace") 
-            
-            if(len(key_resp_5.keys) > 0):
-                key_resp_5.keys.pop() #remove backspace
-                
-        elif("return" in key_resp_5.keys):
-            key_resp_5.keys.remove("return") #remove return
-            
-            if(len(key_resp_5.keys) > 0):
+        if key_resp_5.keys:
+            if(("backspace" in key_resp_5.keys) and len(_key_resp_5_allKeys) > 1):
+                _key_resp_5_allKeys.pop()
+                    
+                if(len(_key_resp_5_allKeys) > 0):
+                    _key_resp_5_allKeys.pop() #remove backspace
+        
+            elif('backspace' in key_resp_5.keys):
+                _key_resp_5_allKeys = []
+                screen_text = ''                
+                        
+            elif("return" in key_resp_5.keys):
+                key_resp_5.keys.pop() #remove return
+                    
+                if(len(key_resp_5.keys) > 0):
+                    screen_text = ''.join(key_resp_5.keys)
+                    thisExp.addData("simple_recall", screen_text) #store response in data file after entering
+                    screen_text = ''
+        
+                continueRoutine = False
+            else:
                 screen_text = ''.join(key_resp_5.keys)
-                thisExp.addData("simple_recall", screen_text) #store response in data file after entering
+                screen_text = screen_text.upper()
         
-            continueRoutine = False
-        
-        if(len(key_resp_5.keys) > 20):
-            key_resp_5.keys.pop() #prevent typing after 20 keys entered
-        
-        
-        screen_text = ''.join(key_resp_5.keys)
-        screen_text = screen_text.upper()
         
         # *instructions_3* updates
         if instructions_3.status == NOT_STARTED and tThisFlip >= 0.5-frameTolerance:
@@ -758,18 +737,17 @@ for thisNext_level in next_level:
     next_level.addData('text_feedback.started', text_feedback.tStartRefresh)
     next_level.addData('text_feedback.stopped', text_feedback.tStopRefresh)
     ##if there are 3 or more wrong responses in 5 or less trials, break
-    
-    if (''.join(key_resp_5.keys).upper() == correct_answer.upper()):
+    if (''.join(key_resp_5.keys).upper() == ''.join(correct_answers[-stimuli_count:]).upper()):
         total_memory_acc = total_memory_acc + 1
         thisExp.addData("simple_recall_corr", "1")
-        thisExp.addData("simple_recall_corrkeys", correct_answer.upper())
+        thisExp.addData("simple_recall_corrkeys", ''.join(correct_answers[-stimuli_count:]).upper())
     else:
         memory_wrong = memory_wrong + 1
         thisExp.addData("simple_recall_corr", "0")
-        thisExp.addData("simple_recall_corrkeys", correct_answer.upper())
+        thisExp.addData("simple_recall_corrkeys", ''.join(correct_answers[-stimuli_count:]).upper())
     
     
-    if (memory_wrong >= 3):
+    if (memory_wrong >= 3 or stimuli_count == 15):
         next_level.finished = True
         continueRoutine = False
     elif (total_memory_acc >= 2):
@@ -777,11 +755,7 @@ for thisNext_level in next_level:
         total_memory_acc = 0
         memory_wrong = 0
     
-    random.shuffle(stimuli_letters)
     
-    chosen_stimuli = stimuli_letters[0:stimuli_count]
-    correct_answer = ''.join(chosen_stimuli)
-    loop_i = 0 #reset letters to print
     
     
     next_level.addData('instructions_3.started', instructions_3.tStartRefresh)
@@ -907,32 +881,30 @@ for thisRepeat_practice in repeat_practice:
             exec('{} = thisRepeat_practice[paramName]'.format(paramName))
     
     # set up handler to look after randomisation of conditions etc
-    trials = data.TrialHandler(nReps=1, method='random', 
+    next_equation = data.TrialHandler(nReps=1, method='random', 
         extraInfo=expInfo, originPath=-1,
-        trialList=data.importConditions('..\\materials\\processing_only_2.xlsx'),
-        seed=None, name='trials')
-    thisExp.addLoop(trials)  # add the loop to the experiment
-    thisTrial = trials.trialList[0]  # so we can initialise stimuli with some values
-    # abbreviate parameter names if possible (e.g. rgb = thisTrial.rgb)
-    if thisTrial != None:
-        for paramName in thisTrial:
-            exec('{} = thisTrial[paramName]'.format(paramName))
+        trialList=data.importConditions('resources/processing_only_2.xlsx'),
+        seed=None, name='next_equation')
+    thisExp.addLoop(next_equation)  # add the loop to the experiment
+    thisNext_equation = next_equation.trialList[0]  # so we can initialise stimuli with some values
+    # abbreviate parameter names if possible (e.g. rgb = thisNext_equation.rgb)
+    if thisNext_equation != None:
+        for paramName in thisNext_equation:
+            exec('{} = thisNext_equation[paramName]'.format(paramName))
     
-    for thisTrial in trials:
-        currentLoop = trials
-        # abbreviate parameter names if possible (e.g. rgb = thisTrial.rgb)
-        if thisTrial != None:
-            for paramName in thisTrial:
-                exec('{} = thisTrial[paramName]'.format(paramName))
+    for thisNext_equation in next_equation:
+        currentLoop = next_equation
+        # abbreviate parameter names if possible (e.g. rgb = thisNext_equation.rgb)
+        if thisNext_equation != None:
+            for paramName in thisNext_equation:
+                exec('{} = thisNext_equation[paramName]'.format(paramName))
         
         # ------Prepare to start Routine "trials_processing"-------
         continueRoutine = True
         # update component parameters for each repeat
-        operation.setText(Problem)
         key_resp.keys = []
         key_resp.rt = []
         _key_resp_allKeys = []
-        instructions_8.setText('Answer?')
         # keep track of which components have finished
         trials_processingComponents = [operation, key_resp, operation_feedback, instructions_8]
         for thisComponent in trials_processingComponents:
@@ -965,6 +937,8 @@ for thisRepeat_practice in repeat_practice:
                 operation.tStartRefresh = tThisFlipGlobal  # on global time
                 win.timeOnFlip(operation, 'tStartRefresh')  # time at next scr refresh
                 operation.setAutoDraw(True)
+            if operation.status == STARTED:  # only update if drawing
+                operation.setText(Problem)
             
             # *key_resp* updates
             waitOnFlip = False
@@ -1002,14 +976,12 @@ for thisRepeat_practice in repeat_practice:
                 win.timeOnFlip(operation_feedback, 'tStartRefresh')  # time at next scr refresh
                 operation_feedback.setAutoDraw(True)
             if operation_feedback.status == STARTED:  # only update if drawing
-                operation_feedback.setText(operation_text)
+                operation_feedback.setText('')
             if(len(key_resp.keys) > 0):
                 operation_text = ''.join(key_resp.keys)
                 thisExp.addData("digit_answer", operation_text) #store response in data file after entering
             
                 continueRoutine = False
-            
-            operation_text = ''.join(key_resp.keys)
             
             
             # *instructions_8* updates
@@ -1020,6 +992,8 @@ for thisRepeat_practice in repeat_practice:
                 instructions_8.tStartRefresh = tThisFlipGlobal  # on global time
                 win.timeOnFlip(instructions_8, 'tStartRefresh')  # time at next scr refresh
                 instructions_8.setAutoDraw(True)
+            if instructions_8.status == STARTED:  # only update if drawing
+                instructions_8.setText('Answer?')
             
             # check for quit (typically the Esc key)
             if endExpNow or defaultKeyboard.getKeys(keyList=["escape"]):
@@ -1042,8 +1016,8 @@ for thisRepeat_practice in repeat_practice:
         for thisComponent in trials_processingComponents:
             if hasattr(thisComponent, "setAutoDraw"):
                 thisComponent.setAutoDraw(False)
-        trials.addData('operation.started', operation.tStartRefresh)
-        trials.addData('operation.stopped', operation.tStopRefresh)
+        next_equation.addData('operation.started', operation.tStartRefresh)
+        next_equation.addData('operation.stopped', operation.tStopRefresh)
         # check responses
         if key_resp.keys in ['', [], None]:  # No response was made
             key_resp.keys = None
@@ -1052,21 +1026,21 @@ for thisRepeat_practice in repeat_practice:
                key_resp.corr = 1;  # correct non-response
             else:
                key_resp.corr = 0;  # failed to respond (incorrectly)
-        # store data for trials (TrialHandler)
-        trials.addData('key_resp.keys',key_resp.keys)
-        trials.addData('key_resp.corr', key_resp.corr)
+        # store data for next_equation (TrialHandler)
+        next_equation.addData('key_resp.keys',key_resp.keys)
+        next_equation.addData('key_resp.corr', key_resp.corr)
         if key_resp.keys != None:  # we had a response
-            trials.addData('key_resp.rt', key_resp.rt)
-        trials.addData('key_resp.started', key_resp.tStartRefresh)
-        trials.addData('key_resp.stopped', key_resp.tStopRefresh)
-        trials.addData('operation_feedback.started', operation_feedback.tStartRefresh)
-        trials.addData('operation_feedback.stopped', operation_feedback.tStopRefresh)
+            next_equation.addData('key_resp.rt', key_resp.rt)
+        next_equation.addData('key_resp.started', key_resp.tStartRefresh)
+        next_equation.addData('key_resp.stopped', key_resp.tStopRefresh)
+        next_equation.addData('operation_feedback.started', operation_feedback.tStartRefresh)
+        next_equation.addData('operation_feedback.stopped', operation_feedback.tStopRefresh)
         key_resp.rt = float(''.join([str(x) for x in key_resp.rt]))
         
         RT_list.append(key_resp.rt)
         thisExp.addData('RT_list', RT_list)
-        trials.addData('instructions_8.started', instructions_8.tStartRefresh)
-        trials.addData('instructions_8.stopped', instructions_8.tStopRefresh)
+        next_equation.addData('instructions_8.started', instructions_8.tStartRefresh)
+        next_equation.addData('instructions_8.stopped', instructions_8.tStopRefresh)
         # the Routine "trials_processing" was not non-slip safe, so reset the non-slip timer
         routineTimer.reset()
         
@@ -1074,18 +1048,19 @@ for thisRepeat_practice in repeat_practice:
         continueRoutine = True
         routineTimer.add(1.500000)
         # update component parameters for each repeat
-        if trials.thisN == 0:
+        if next_equation.thisN == 0:
             number_correct = 0
         
         if (''.join(key_resp.keys) == str(Operation_answer)):
+            total_number += 1
             number_correct = number_correct + 1
-            msg='Correct! \nScore = %.1f%%' %(number_correct*100/trials.nTotal)
+            msg='Correct! \nScore = ' + str(round(number_correct*100/total_number, 2)) + '%'
             msgColor = 'green'
         else:
-            msg='Oops! That was wrong \nScore = %.1f%%' %(number_correct*100/trials.nTotal)
+            total_number += 1
+            msg='Oops! That was wrong \nScore = ' + str(round(number_correct*100/total_number,2)) + '%'
             msgColor = 'red'
         feedback_msg.setColor(msgColor, colorSpace='rgb')
-        feedback_msg.setText(msg)
         # keep track of which components have finished
         feedbackComponents = [feedback_msg]
         for thisComponent in feedbackComponents:
@@ -1110,10 +1085,6 @@ for thisRepeat_practice in repeat_practice:
             frameN = frameN + 1  # number of completed frames (so 0 is the first frame)
             # update/draw components on each frame
             
-            
-            
-            
-            
             # *feedback_msg* updates
             if feedback_msg.status == NOT_STARTED and tThisFlip >= 0.5-frameTolerance:
                 # keep track of start time/frame for later
@@ -1130,6 +1101,8 @@ for thisRepeat_practice in repeat_practice:
                     feedback_msg.frameNStop = frameN  # exact frame index
                     win.timeOnFlip(feedback_msg, 'tStopRefresh')  # time at next scr refresh
                     feedback_msg.setAutoDraw(False)
+            if feedback_msg.status == STARTED:  # only update if drawing
+                feedback_msg.setText(msg)
             
             # check for quit (typically the Esc key)
             if endExpNow or defaultKeyboard.getKeys(keyList=["escape"]):
@@ -1152,23 +1125,21 @@ for thisRepeat_practice in repeat_practice:
         for thisComponent in feedbackComponents:
             if hasattr(thisComponent, "setAutoDraw"):
                 thisComponent.setAutoDraw(False)
-        
-        
-        trials.addData('feedback_msg.started', feedback_msg.tStartRefresh)
-        trials.addData('feedback_msg.stopped', feedback_msg.tStopRefresh)
+        next_equation.addData('feedback_msg.started', feedback_msg.tStartRefresh)
+        next_equation.addData('feedback_msg.stopped', feedback_msg.tStopRefresh)
         thisExp.nextEntry()
         
-    # completed 1 repeats of 'trials'
+    # completed 1 repeats of 'next_equation'
     
     
     # ------Prepare to start Routine "final_feedback"-------
     continueRoutine = True
     # update component parameters for each repeat
-    if trials.thisN == trials.nTotal:
-        if (number_correct/(trials.nTotal)) >= 0.65:
+    if next_equation.thisN == next_equation.nTotal:
+        if (number_correct/(next_equation.nTotal)) >= 0.65:
             proc_msg = 'Congratulations, you answered correctly on above 65% of the trials. Press space to continue.'
             repeat_practice.finished = True
-            thisExp.addData("processing_score", (number_correct/(trials.nTotal)))
+            thisExp.addData("processing_score", (number_correct/(next_equation.nTotal)))
         else:
             proc_msg = 'You failed to answer correctly on at least 65% of the trials, please try again until you reach the passing rate of 65%. Press space to start.'
             repeat_practice.finished = False 
@@ -1405,7 +1376,7 @@ for thisSpan_recall_prac in span_recall_prac:
     # set up handler to look after randomisation of conditions etc
     span_size_prac = data.TrialHandler(nReps=2, method='random', 
         extraInfo=expInfo, originPath=-1,
-        trialList=[None],
+        trialList=data.importConditions('resources/letters.csv'),
         seed=None, name='span_size_prac')
     thisExp.addLoop(span_size_prac)  # add the loop to the experiment
     thisSpan_size_prac = span_size_prac.trialList[0]  # so we can initialise stimuli with some values
@@ -1424,7 +1395,7 @@ for thisSpan_recall_prac in span_recall_prac:
         # set up handler to look after randomisation of conditions etc
         repeat_if_wrong_prac = data.TrialHandler(nReps=999, method='random', 
             extraInfo=expInfo, originPath=-1,
-            trialList=data.importConditions('..\\materials\\processing_only_2.xlsx'),
+            trialList=data.importConditions('resources/processing_only_2.xlsx'),
             seed=None, name='repeat_if_wrong_prac')
         thisExp.addLoop(repeat_if_wrong_prac)  # add the loop to the experiment
         thisRepeat_if_wrong_prac = repeat_if_wrong_prac.trialList[0]  # so we can initialise stimuli with some values
@@ -1542,7 +1513,7 @@ for thisSpan_recall_prac in span_recall_prac:
                         win.timeOnFlip(operation_feedback_2, 'tStopRefresh')  # time at next scr refresh
                         operation_feedback_2.setAutoDraw(False)
                 if operation_feedback_2.status == STARTED:  # only update if drawing
-                    operation_feedback_2.setText(operation_text_2)
+                    operation_feedback_2.setText('')
                 if(len(key_resp_11.keys) > 0):
                     operation_text_2 = ''.join(key_resp_11.keys)
                     thisExp.addData("digit_answer", operation_text_2) #store response in data file after entering
@@ -1617,23 +1588,22 @@ for thisSpan_recall_prac in span_recall_prac:
             continueRoutine = True
             routineTimer.add(0.800000)
             # update component parameters for each repeat
-            loop_o += 1
-            
+            loop_o = loop_o + 1
             if not key_resp_11.keys: #if no entry
                 continueRoutine = True
-                msg3 ='Be faster! \nScore = %.1f%%' %(number_correct_2*100/loop_o)
+                msg3 ='Be faster! \nScore = ' + str(round(number_correct_2*100/loop_o,2)) + '%'
                 msg3Color = 'red'
                 thisExp.addData("operation_correct", 0)
                 repeat_if_wrong_prac.finished = False
             else:
                 if (''.join(key_resp_11.keys) == str(Operation_answer)):
                     number_correct_2 = number_correct_2 + 1
-                    msg3 ='Correct! \nScore = %.1f%%' %(number_correct_2*100/loop_o)
+                    msg3 ='Correct! \nScore = ' + str(round(number_correct_2*100/loop_o,2)) + '%'
                     msg3Color = 'green'
                     thisExp.addData("operation_correct", 1)
                     repeat_if_wrong_prac.finished = True 
                 else:
-                    msg3 ='Oops! That was wrong \nScore = %.1f%%' %(number_correct_2*100/loop_o)
+                    msg3 ='Oops! That was wrong \nScore = ' + str(round(number_correct_2*100/loop_o,2)) + '%'
                     msg3Color = 'red'
                     thisExp.addData("operation_correct", 0)
                     repeat_if_wrong_prac.finished = False
@@ -1736,8 +1706,12 @@ for thisSpan_recall_prac in span_recall_prac:
         continueRoutine = True
         routineTimer.add(1.300000)
         # update component parameters for each repeat
-        text_3.setText(chosen_stimuli_3[loop_i_3])
-        loop_i_3 += 1
+        text_3.setText(stimuli_2)
+        import random
+        correct_answers_2.append(stimuli_2)
+        letter = letter.split(' ')
+        stimuli_2 = random.choice(letter)
+        
         
         # keep track of which components have finished
         show_letters_pracComponents = [text_3]
@@ -1859,7 +1833,7 @@ for thisSpan_recall_prac in span_recall_prac:
                 key_resp_9.keys = [key.name for key in _key_resp_9_allKeys]  # storing all keys
                 key_resp_9.rt = [key.rt for key in _key_resp_9_allKeys]
                 # was this correct?
-                if (key_resp_9.keys == str(correct_answer_3)) or (key_resp_9.keys == correct_answer_3):
+                if (key_resp_9.keys == str(correct_answers_2)) or (key_resp_9.keys == correct_answers_2):
                     key_resp_9.corr = 1
                 else:
                     key_resp_9.corr = 0
@@ -1874,27 +1848,30 @@ for thisSpan_recall_prac in span_recall_prac:
             text_feedback_3.setAutoDraw(True)
         if text_feedback_3.status == STARTED:  # only update if drawing
             text_feedback_3.setText(screen_text_3)
-        if("backspace" in key_resp_9.keys):
-            key_resp_9.keys.remove("backspace") 
-            
-            if(len(key_resp_9.keys) > 0):
-                key_resp_9.keys.pop() #remove backspace
-                
-        elif("return" in key_resp_9.keys):
-            key_resp_9.keys.remove("return") #remove return
-            
-            if(len(key_resp_9.keys) > 0):
+        if key_resp_9.keys:
+            if(("backspace" in key_resp_9.keys) and len(_key_resp_9_allKeys) > 1):
+                _key_resp_9_allKeys.pop()
+                    
+                if(len(_key_resp_9_allKeys) > 0):
+                    _key_resp_9_allKeys.pop() #remove backspace
+        
+            elif('backspace' in key_resp_9.keys):
+                _key_resp_9_allKeys = []
+                screen_text_3 = ''                
+                        
+            elif("return" in key_resp_9.keys):
+                key_resp_9.keys.pop() #remove return
+                    
+                if(len(key_resp_9.keys) > 0):
+                    screen_text_3 = ''.join(key_resp_9.keys)
+                    thisExp.addData("complex_recall_practice", screen_text_3) #store response in data file after entering
+                    screen_text_3 = ''
+        
+                continueRoutine = False
+            else:
                 screen_text_3 = ''.join(key_resp_9.keys)
-                thisExp.addData("complex_recall_prac", screen_text_3)
-            
-            continueRoutine = False
+                screen_text_3 = screen_text_3.upper()
         
-        if(len(key_resp_9.keys) > 3):
-            key_resp_9.keys.pop() #prevent typing after 3 keys entered
-        
-        
-        screen_text_3 = ''.join(key_resp_9.keys)
-        screen_text_3 = screen_text_3.upper()
         
         # *instructions_6* updates
         if instructions_6.status == NOT_STARTED and tThisFlip >= 0.5-frameTolerance:
@@ -1930,7 +1907,7 @@ for thisSpan_recall_prac in span_recall_prac:
     if key_resp_9.keys in ['', [], None]:  # No response was made
         key_resp_9.keys = None
         # was no response the correct answer?!
-        if str(correct_answer_3).lower() == 'none':
+        if str(correct_answers_2).lower() == 'none':
            key_resp_9.corr = 1;  # correct non-response
         else:
            key_resp_9.corr = 0;  # failed to respond (incorrectly)
@@ -1952,7 +1929,7 @@ for thisSpan_recall_prac in span_recall_prac:
     continueRoutine = True
     routineTimer.add(1.500000)
     # update component parameters for each repeat
-    if (''.join(key_resp_9.keys).upper() == correct_answer_3.upper()):
+    if (''.join(key_resp_9.keys).upper() == ''.join(correct_answers_2[-2:]).upper()):
         msg2 = 'Correct'
         msg2Color = 'green'
     else:
@@ -2023,7 +2000,7 @@ for thisSpan_recall_prac in span_recall_prac:
     for thisComponent in feedback_2Components:
         if hasattr(thisComponent, "setAutoDraw"):
             thisComponent.setAutoDraw(False)
-    if (''.join(key_resp_9.keys).upper() == correct_answer_3.upper()):
+    if (''.join(key_resp_9.keys).upper() == ''.join(correct_answers_2[-2:]).upper()):
         prac_acc = prac_acc + 1
         thisExp.addData("complex_prac_corr", "1")
     else:
@@ -2037,9 +2014,6 @@ for thisSpan_recall_prac in span_recall_prac:
         continueRoutine = False
     #stop practice if 3 consecutive trials correct
     
-    random.shuffle(stimuli_letters)
-    chosen_stimuli_3 = stimuli_letters[0:2] 
-    correct_answer_3 = ''.join(chosen_stimuli_3) 
     loop_i_3 = 0
     span_recall_prac.addData('feedback_msg_3.started', feedback_msg_3.tStartRefresh)
     span_recall_prac.addData('feedback_msg_3.stopped', feedback_msg_3.tStopRefresh)
@@ -2166,7 +2140,7 @@ for thisSpan_recall in span_recall:
     # set up handler to look after randomisation of conditions etc
     span_size = data.TrialHandler(nReps=span_count, method='random', 
         extraInfo=expInfo, originPath=-1,
-        trialList=[None],
+        trialList=data.importConditions('resources/letters.csv'),
         seed=None, name='span_size')
     thisExp.addLoop(span_size)  # add the loop to the experiment
     thisSpan_size = span_size.trialList[0]  # so we can initialise stimuli with some values
@@ -2185,7 +2159,7 @@ for thisSpan_recall in span_recall:
         # set up handler to look after randomisation of conditions etc
         repeat_if_wrong = data.TrialHandler(nReps=999, method='random', 
             extraInfo=expInfo, originPath=-1,
-            trialList=data.importConditions('..\\materials\\processing_only_2.xlsx'),
+            trialList=data.importConditions('resources/processing_only_2.xlsx'),
             seed=None, name='repeat_if_wrong')
         thisExp.addLoop(repeat_if_wrong)  # add the loop to the experiment
         thisRepeat_if_wrong = repeat_if_wrong.trialList[0]  # so we can initialise stimuli with some values
@@ -2381,19 +2355,19 @@ for thisSpan_recall in span_recall:
             
             if not key_resp_7.keys: #if no entry
                 continueRoutine = True
-                msg4 ='Be faster! \nScore = %.1f%%' %(number_correct_3*100/loop_o_2)
+                msg4 ='Be faster! \nScore = ' + str(round(number_correct_3*100/loop_o_2,2)) + '%'
                 msg4Color = 'red'
                 thisExp.addData("operation_correct", 0)
                 repeat_if_wrong.finished = False
             else:
                 if (''.join(key_resp_7.keys) == str(Operation_answer)):
                     number_correct_3 = number_correct_3 + 1
-                    msg4 ='Correct! \nScore = %.1f%%' %(number_correct_3*100/loop_o_2)
+                    msg4 ='Correct! \nScore = ' + str(round(number_correct_3*100/loop_o_2,2)) + '%'
                     msg4Color = 'green'
                     thisExp.addData("operation_correct", 1)
                     repeat_if_wrong.finished = True 
                 else:
-                    msg4 ='Oops! That was wrong \nScore = %.1f%%' %(number_correct_3*100/loop_o_2)
+                    msg4 ='Oops! That was wrong \nScore = ' + str(round(number_correct_3*100/loop_o_2,2)) + '%'
                     msg4Color = 'red'
                     thisExp.addData("operation_correct", 0)
                     repeat_if_wrong.finished = False
@@ -2496,8 +2470,12 @@ for thisSpan_recall in span_recall:
         continueRoutine = True
         routineTimer.add(1.300000)
         # update component parameters for each repeat
-        text.setText(chosen_stimuli_2[loop_i_2])
-        loop_i_2 += 1
+        text.setText(stimuli_3)
+        import random
+        correct_answers_3.append(stimuli_3)
+        letter = letter.split(' ')
+        stimuli_3 = random.choice(letter)
+        
         # keep track of which components have finished
         show_letters_2Components = [text]
         for thisComponent in show_letters_2Components:
@@ -2562,8 +2540,6 @@ for thisSpan_recall in span_recall:
                 thisComponent.setAutoDraw(False)
         span_size.addData('text.started', text.tStartRefresh)
         span_size.addData('text.stopped', text.tStopRefresh)
-        thisExp.nextEntry()
-        
     # completed span_count repeats of 'span_size'
     
     
@@ -2618,7 +2594,7 @@ for thisSpan_recall in span_recall:
                 key_resp_8.keys = [key.name for key in _key_resp_8_allKeys]  # storing all keys
                 key_resp_8.rt = [key.rt for key in _key_resp_8_allKeys]
                 # was this correct?
-                if (key_resp_8.keys == str(correct_answer_2)) or (key_resp_8.keys == correct_answer_2):
+                if (key_resp_8.keys == str(correct_answers_3)) or (key_resp_8.keys == correct_answers_3):
                     key_resp_8.corr = 1
                 else:
                     key_resp_8.corr = 0
@@ -2633,27 +2609,32 @@ for thisSpan_recall in span_recall:
             text_feedback_2.setAutoDraw(True)
         if text_feedback_2.status == STARTED:  # only update if drawing
             text_feedback_2.setText(screen_text_2)
-        if("backspace" in key_resp_8.keys):
-            key_resp_8.keys.remove("backspace") 
-            
-            if(len(key_resp_8.keys) > 0):
-                key_resp_8.keys.pop() #remove backspace
-                
-        elif("return" in key_resp_8.keys):
-            key_resp_8.keys.remove("return") #remove return
-            
-            if(len(key_resp_8.keys) > 0):
+        if key_resp_8.keys:
+            if(("backspace" in key_resp_8.keys) and len(_key_resp_8_allKeys) > 1):
+                _key_resp_8_allKeys.pop()
+                    
+                if(len(_key_resp_8_allKeys) > 0):
+                    _key_resp_8_allKeys.pop() #remove backspace
+        
+            elif('backspace' in key_resp_8.keys):
+                _key_resp_8_allKeys = []
+                screen_text_2 = ''                
+                        
+            elif("return" in key_resp_8.keys):
+                key_resp_8.keys.pop() #remove return
+                    
+                if(len(key_resp_8.keys) > 0):
+                    screen_text_2 = ''.join(key_resp_8.keys)
+                    thisExp.addData("complex_recall", screen_text_2) #store response in data file after entering
+                    screen_text_2 = ''
+        
+                continueRoutine = False
+            else:
                 screen_text_2 = ''.join(key_resp_8.keys)
-                thisExp.addData("complex_recall", screen_text_2) #store response in data file after entering
-            
-            continueRoutine = False
-        
-        if(len(key_resp_8.keys) > 20):
-            key_resp_8.keys.pop() #prevent typing after 20 keys entered
+                screen_text_2 = screen_text_2.upper()
         
         
-        screen_text_2 = ''.join(key_resp_8.keys)
-        screen_text_2 = screen_text_2.upper()
+        
         
         # *instructions_5* updates
         if instructions_5.status == NOT_STARTED and tThisFlip >= 0.5-frameTolerance:
@@ -2689,7 +2670,7 @@ for thisSpan_recall in span_recall:
     if key_resp_8.keys in ['', [], None]:  # No response was made
         key_resp_8.keys = None
         # was no response the correct answer?!
-        if str(correct_answer_2).lower() == 'none':
+        if str(correct_answers_3).lower() == 'none':
            key_resp_8.corr = 1;  # correct non-response
         else:
            key_resp_8.corr = 0;  # failed to respond (incorrectly)
@@ -2702,24 +2683,19 @@ for thisSpan_recall in span_recall:
     span_recall.addData('key_resp_8.stopped', key_resp_8.tStopRefresh)
     span_recall.addData('text_feedback_2.started', text_feedback_2.tStartRefresh)
     span_recall.addData('text_feedback_2.stopped', text_feedback_2.tStopRefresh)
-    if (''.join(key_resp_8.keys).upper() == correct_answer_2.upper()):
-        span_count = span_count + 1 #increase set size
+    if (''.join(key_resp_8.keys[-span_count:]).upper() == ''.join(correct_answers_3[-span_count:]).upper()):
         complex_wrong = 0 #reset wrong number of repsonses
         thisExp.addData("complex_recall_corr", "1") 
-        thisExp.addData("complex_recall_corrkeys", correct_answer_2.upper())
+        thisExp.addData("complex_recall_corrkeys", ''.join(correct_answers_3[-span_count:]).upper())
+        span_count = span_count + 1 #increase set size
     else:
         complex_wrong = complex_wrong + 1
         thisExp.addData("complex_recall_corr", "0")
-        thisExp.addData("complex_recall_corrkeys", correct_answer_2.upper())
+        thisExp.addData("complex_recall_corrkeys", ''.join(correct_answers_3[-span_count:]).upper())
     
     if (complex_wrong == 2):
         span_recall.finished = True
         continueRoutine = False #stop task if 2 consec wrong trials in set size
-    
-    
-    random.shuffle(stimuli_letters)
-    chosen_stimuli_2 = stimuli_letters[0:span_count] #update choose n letters
-    correct_answer_2 = ''.join(chosen_stimuli_2) #update join n letters
     
     loop_i_2 = 0
     span_recall.addData('instructions_5.started', instructions_5.tStartRefresh)

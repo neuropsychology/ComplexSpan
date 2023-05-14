@@ -4,7 +4,7 @@
 # library(tidyverse)
 #
 # Example
-# path <- "./data/pilot_2.csv"
+# path <- "./data/S1.csv"
 preprocess_WM <- function(path, skip_complexspan=""){  
   
   # Clean data
@@ -26,9 +26,17 @@ preprocess_WM <- function(path, skip_complexspan=""){
     paste0("Skipping computation of complex span for ", skip_complexspan, ".")
   }
   
+  # Compute partial credit unit scoring
+  out$Partial_Correct <- 0
+  for (row in 1:nrow(out)) {
+    participant <- out[row, ]
+    partial_correct <- .unit_scoring(participant$Stimulus, participant$Response)
+    out$Partial_Correct[row] <- partial_correct
+  }
+  
   out <- dplyr::arrange(out, desc(Task), Trial, Correct)
   row.names(out) <- NULL
-  out[c("Participant", "Task", "Set_Size", "Trial", "Stimulus", "Response", "Correct", "Distractor", "Distractor_Correct", "Distractor_RT")]
+  out[c("Participant", "Task", "Set_Size", "Trial", "Stimulus", "Response", "Correct", "Partial_Correct", "Distractor", "Distractor_Correct", "Distractor_RT")]
 }
 
 # Utility functions -------------------------------------------------------
@@ -128,3 +136,13 @@ preprocess_WM <- function(path, skip_complexspan=""){
   Complex_Span
 }
 
+
+.unit_scoring <- function(stimulus_string, response_string){
+  
+  target_length <- length(strsplit(stimulus_string, "")[[1]])
+  res <- unique(strsplit(response_string, "")[[1]])
+  total_characters_recalled <- sum(str_count(stimulus_string, res))
+  proportion_characters_recalled <- total_characters_recalled / target_length
+  
+  return (proportion_characters_recalled)
+}

@@ -5,7 +5,7 @@
 # library(dplyr)
 #
 # Example
-# path <- "./data/pilot_2.csv"
+# path <- "./data/S1.csv"
 
 process_WM <- function(path, skip_complexspan=""){
   data <- preprocess_WM(path, skip_complexspan=skip_complexspan)
@@ -52,4 +52,6 @@ process_WM <- function(path, skip_complexspan=""){
   
   return(list(between = Between_Participant, within = Within_Participant, distractors = Distractors))
 }
+
+
 

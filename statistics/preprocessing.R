@@ -26,17 +26,27 @@ preprocess_WM <- function(path, skip_complexspan=""){
     paste0("Skipping computation of complex span for ", skip_complexspan, ".")
   }
   
-  # Compute partial credit unit scoring
-  out$Partial_Correct <- 0
+  # Compute partial scoring
+  out$Partial_Load_Correct <- 0
+  out$Partial_Unit_Correct <- 0
   for (row in 1:nrow(out)) {
     participant <- out[row, ]
-    partial_correct <- .unit_scoring(participant$Stimulus, participant$Response)
-    out$Partial_Correct[row] <- partial_correct
+
+    load <- .partial_scoring(participant$Stimulus, participant$Response)[1]
+    unit <- .partial_scoring(participant$Stimulus, participant$Response)[2]
+    out$Partial_Load_Correct[row] <- load
+    out$Partial_Unit_Correct[row] <- unit
   }
   
+  # Compute ANL load scoring
+  out <- .anl_load_scoring(out)
+  
+  # Tidy output
   out <- dplyr::arrange(out, desc(Task), Trial, Correct)
   row.names(out) <- NULL
-  out[c("Participant", "Task", "Set_Size", "Trial", "Stimulus", "Response", "Correct", "Partial_Correct", "Distractor", "Distractor_Correct", "Distractor_RT")]
+  out[c("Participant", "Task", "Set_Size", "Trial", "Stimulus", "Response", "Correct",
+        "Partial_Load_Correct", "Partial_Unit_Correct", "ANL_Load_Correct",
+        "Distractor", "Distractor_Correct", "Distractor_RT")]
 }
 
 # Utility functions -------------------------------------------------------
@@ -137,12 +147,27 @@ preprocess_WM <- function(path, skip_complexspan=""){
 }
 
 
-.unit_scoring <- function(stimulus_string, response_string){
+# Partial credit scoring
+.partial_scoring <- function(stimulus_string, response_string){
   
   target_length <- length(strsplit(stimulus_string, "")[[1]])
   res <- unique(strsplit(response_string, "")[[1]])
+  
+  # partial credit load scoring
   total_characters_recalled <- sum(str_count(stimulus_string, res))
+  
+  # partial credit unit scoring
   proportion_characters_recalled <- total_characters_recalled / target_length
   
-  return (proportion_characters_recalled)
+  return (list(total_characters_recalled, proportion_characters_recalled))
+}
+
+
+# All-or-nothing Load scoring
+.anl_load_scoring <- function(out){
+  
+  out <- out %>% 
+    mutate(ANL_Load_Correct = ifelse(Correct == 1, Partial_Load_Correct, 0))
+  
+  return (out)
 }

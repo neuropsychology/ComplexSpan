@@ -32,8 +32,8 @@ preprocess_WM <- function(path, skip_complexspan=""){
   for (row in 1:nrow(out)) {
     participant <- out[row, ]
 
-    load <- .partial_scoring(participant$Stimulus, participant$Response)[1]
-    unit <- .partial_scoring(participant$Stimulus, participant$Response)[2]
+    load <- .partial_scoring(participant$Stimulus, participant$Response)[[1]]
+    unit <- .partial_scoring(participant$Stimulus, participant$Response)[[2]]
     out$Partial_Load_Correct[row] <- load
     out$Partial_Unit_Correct[row] <- unit
   }

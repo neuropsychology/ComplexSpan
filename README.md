@@ -78,6 +78,41 @@ process_WM(path_to_csv)
 To create **figures**, create a folder called "figures" in your working directory and download the make_figures.R file; running the code will save the figures in this folder.
 - source("https://github.com/neuropsychology/ComplexSpan/blob/master/statistics/make_figures.R")
 
+#### Preprocess data for several participants
+
+```r
+# ---- Example Script ---- #
+# > getwd()
+# [1] "/Users/lauzenjuen/Documents/GitHub/ComplexSpan/statistics"
+
+# Load packages
+library(tidyverse)
+library(easystats)
+
+# Load functions
+source("preprocessing.R")
+source("processing.R")
+
+# Combine Data Frames
+data <- data.frame()
+data_subject <- data.frame()
+data_within <- data.frame()
+data_distractors <- data.frame()
+
+for(participant in list.files("./data/")){
+  data <- rbind(data, preprocess_WM(paste0("./data/", participant)))
+  
+  processed <- process_WM(paste0("./data/", participant))
+  data_subject <- rbind(data_subject, processed$between)
+  data_within <- rbind(data_within, processed$within)
+  data_distractors <- rbind(data_distractors, processed$distractors)
+}
+
+data_subject  # produces a table of scores across participants
+```
+![image](https://github.com/neuropsychology/ComplexSpan/assets/54053748/8377969d-c3fd-4fc4-8df2-4f69b99bd922)
+
+
 
 ### Task Components
 

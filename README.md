@@ -29,9 +29,9 @@ of working memory capacity.
 ### Requirements
 
 Softwares needed:
-- PsychoPy (https://www.psychopy.org/download.html)
-- R 3.6.1 (https://cran.r-project.org/bin/windows/base/)
-- R Studio (https://rstudio.com/products/rstudio/download/)
+- PsychoPy >= v2021.1.4 (https://www.psychopy.org/download.html)
+- R >= 3.6.1 (https://cran.r-project.org/bin/windows/base/)
+- RStudio >= 2021.09.0 (https://rstudio.com/products/rstudio/download/)
 
 Packages needed in R:
 - [tidyverse](https://cran.r-project.org/web/packages/tidyverse/index.html)
@@ -43,7 +43,6 @@ Packages needed in R:
 2. Click on the green button to begin the task
 3. Enter participant number and session number 
 4. Run task
-- Instruct participants not to press "Enter" at any point during the task unless required, as the experiment would quit if so
 5. Task outputs 3 files: a csv file, a text document, and a psydat file
 
 
